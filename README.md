@@ -6,12 +6,12 @@ For the first phase of the project, you will be using the various planning techn
 
 ## First Step (Project Options)
 
-Get together with your team (you can use your team repo to exchange contact information), and choose one of the [3 project options](ProjectOptions.md). Once you decide on a project, read this handout together, and make sure everybody is clear on what they need to do.
+Get together with your team (you can use your team repo to exchange contact information), and choose one of the 3 project options. Once you decide on a project, read this handout together, and make sure everybody is clear on what they need to do.
 
 _Note:_ You will not be allowed to switch projects after this phase, so please make sure you are happy with your choice.
 
 ###  Messaging Application for Universities
-#### Android/Web/Console-application
+#### [Android/Web/Console-application]
 
 A messaging app that allows users to send/receive messages by topic. The idea is to provide students (and perhaps instructors, admin staff, etc.) with a convenient tool to broadcast (and consume) important/relevant information. 
 
@@ -23,7 +23,7 @@ Just to give you an idea, here are example of hypothetical topics that could mak
 
 
 ### Time Management Tool for Students
-#### Android/Web/Console-application
+#### [Android/Web/Console-application]
 
 A tool that allows students to conveniently manage their schedule. The main highlight of the product is that it has all lecture and tutorial times, as well as all due dates, in one place.
 
@@ -31,7 +31,7 @@ The main challenge in this project comes from the (very realistic) assumption th
 
 
 ### Frosh Week Treasure Hunt App
-#### Android
+#### [Android]
 
 [Treasure Hunt](http://www.google.com/url?q=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTreasure_hunt_%2528game%2529&sa=D&sntz=1&usg=AFQjCNF96uF5D_3PYDeXyLgz9MglCz45bQ) is a classic choice for an event like Frosh Week - New students get to meet each other and explore the campus. The goal of this project is to build an app that will make a Frosh Week Treasure Hunt game a better experience.
 
