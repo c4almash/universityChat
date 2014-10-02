@@ -4,15 +4,13 @@ For the first phase of the project, you will be using the various planning techn
  * Understanding what product you want to build, and planning your first few steps.
  * Developing an efficient way of working together as a team (i.e. developing a process).
 
-## First Step
+## First Step (Project Options)
 
 Get together with your team (you can use your team repo to exchange contact information), and choose one of the [3 project options](ProjectOptions.md). Once you decide on a project, read this handout together, and make sure everybody is clear on what they need to do.
 
 _Note:_ You will not be allowed to switch projects after this phase, so please make sure you are happy with your choice.
-# CSC301, Project Options
 
-
-##  Messaging Application for Universities
+###  Messaging Application for Universities
 #### Android/Web/Console-application
 
 A messaging app that allows users to send/receive messages by topic. The idea is to provide students (and perhaps instructors, admin staff, etc.) with a convenient tool to broadcast (and consume) important/relevant information. 
@@ -24,7 +22,7 @@ The most basic features are:
 Just to give you an idea, here are example of hypothetical topics that could make sense: _1st Year Students_, _CSC301_, _Victoria College Events_, _St. George Traffic and Parking Notifications_, _Roommates Wanted_, etc.
 
 
-## Time Management Tool for Students
+### Time Management Tool for Students
 #### Android/Web/Console-application
 
 A tool that allows students to conveniently manage their schedule. The main highlight of the product is that it has all lecture and tutorial times, as well as all due dates, in one place.
@@ -32,7 +30,7 @@ A tool that allows students to conveniently manage their schedule. The main high
 The main challenge in this project comes from the (very realistic) assumption that instructors will not be cooperative. That is, you cannot count on instructors to create/update due dates. Your system, like most modern systems, should deal with this challenge by letting its users generate and validate the data.
 
 
-## Frosh Week Treasure Hunt App
+### Frosh Week Treasure Hunt App
 #### Android
 
 [Treasure Hunt](http://www.google.com/url?q=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FTreasure_hunt_%2528game%2529&sa=D&sntz=1&usg=AFQjCNF96uF5D_3PYDeXyLgz9MglCz45bQ) is a classic choice for an event like Frosh Week - New students get to meet each other and explore the campus. The goal of this project is to build an app that will make a Frosh Week Treasure Hunt game a better experience.
