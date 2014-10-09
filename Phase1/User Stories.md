@@ -6,7 +6,7 @@
   - Acceptance tests/criteria:
   
 * User story #2:
-  - As Dr. Johnson, I want to recieve real time email notification from topics that I subscribed to, so that I can respond to students' questions on time.
+  - As Dr. Johnson, I want to receive real time email notification from topics that I subscribed to, so that I can respond to students' questions on time.
   
   - Priority: MEDIUM
   - Difficulty/size:
