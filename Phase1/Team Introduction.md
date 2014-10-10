@@ -4,7 +4,7 @@
     ![Team 1](Team_Picture.jpg)
     
 - Biography (Please add your bio down below)
-  - **g3aishih** - Shihan Ai
+  - **Shihan Ai** - g3aishih
     - Shihan is a 3rd year computer science student in UTSG.
         He likes to program with Java and develop Android applications.
         He also enjoys designing websites.
@@ -25,18 +25,21 @@
       and looks forward to working with the group as well as developing
       his own skills. 
   
-  - **g3abby** - g3abby
-    - As a student specializing in Computer Science in UTSG, Abby started her PEY after 3rd year, currently working as a full-time Test Automation Developer at Trapezegroup. She has plenty of experience in issue investigation and writing automated test scripts for regression test. Besides her knowledge in Quality Assurance and Agile Development Methodology, she is also attracted to UI/UX design, and being good at Photoshopping.
+  - **Abby Zhu** - g3abby
+    - As a student specializing in Computer Science in UTSG, Abby started her PEY after 3rd year, currently working as a              full-time Test Automation Developer at Trapezegroup. She has plenty of experience in issue investigation and writing            automated test scripts for regression test. Besides her knowledge in Quality Assurance and Agile Development Methodology,       she is also attracted to UI/UX design, and being good at Photoshopping.
   
-  - g3wu
+  - **Lawrence Wu** - g3wu
     - Lawrence is a third year Computer Science student at UTSG specializing
       in Computer Systems. He is interested in full-stack web development,
       programming languages, data structures, and systems design and
       administration. He worked on MarkUs last summer and will be working at
       Yelp next summer. Lawrence's tools of choice are vim, git, tmux, and zsh.
   
-  - c4almash
-  
+  - **Yahya Al-Mashni** - c4almash
+    - Yahya is a third year Digital Enterprise Management student at UTM. He is also majoring in Computer Science.
+      His main area of interest is web design and development and hence he is the web admin for multiple student organisations.
+      Yahya has an abundance of experience in Java, HTML/CSS and Python. Yahya has been a part of multiple project based design       courses and has taken several management courses and is currently focusing on E-Business operation.
+ 
   - **AlexDar** - c4darmin
     - I'm a 4th year compsci student enrolled in UTSC but taking a semester
       at UTSG. I've worked part time as a web developer for almost two years
