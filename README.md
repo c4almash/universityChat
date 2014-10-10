@@ -1,14 +1,16 @@
-# > [Team Introduction](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team%20Introduction.md)
-## &nbsp;&nbsp; - [Team Photo](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team_Picture.jpg)
-# > [About Project](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/About%20project.md)
-# > [Personas](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Personas.md)
-## &nbsp;&nbsp; 1. [Brenda](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Persona_Brenda.png)
-## &nbsp;&nbsp; 2. [Jeffery](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Persona_Jeffery.JPG)
-## &nbsp;&nbsp; 3. [Dr.Johnson](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Persona_Dr.Johnson.jpg)
-# > [User Stories](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/User%20Stories.md)
-# > [MVP](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/MVP.md)
-# > [Release & Iteration Planning](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Release%20%26%20Iteration%20Planning.md)
-# > [CRC Cards](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/CRC%20cards.md)
+# Deliverables
+## > [Team Introduction](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team%20Introduction.md)
+### &nbsp;&nbsp; - [Team Photo](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team_Picture.jpg)
+## > [About Project](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/About%20project.md)
+## > [Personas](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Personas.md)
+### &nbsp;&nbsp; - Photos
+### &nbsp;&nbsp;&nbsp; 1. [Brenda](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Persona_Brenda.png)
+### &nbsp;&nbsp;&nbsp; 2. [Jeffery](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Persona_Jeffery.JPG)
+### &nbsp;&nbsp;&nbsp; 3. [Dr.Johnson](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Persona_Dr.Johnson.jpg)
+## > [User Stories](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/User%20Stories.md)
+## > [MVP](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/MVP.md)
+## > [Release & Iteration Planning](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Release%20%26%20Iteration%20Planning.md)
+## > [CRC Cards](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/CRC%20cards.md)
 
 # Project, Phase 1 - Planning
 
