@@ -13,7 +13,12 @@
       improve his software development process. During the summer, he
       worked at a start up and contributed to opensource projects.
   
-  - c2laitim
+  - **Timothy Lai** - c2laitim
+    - Timothy is a 3rd year Compter Science student studying at the 
+      University of Toronto, St. George Campus. Though he may lack in
+      experience, he is willing to learn from his fellow group members
+      and looks forward to working with the group as well as developing
+      his own skills. 
   
   - **g3abby** - g3abby
     - As a student specializing in Computer Science in UTSG, Abby started her PEY after 3rd year, currently working as a full-time Test Automation Developer at Trapezegroup. She has plenty of experience in issue investigation and writing automated test scripts for regression test. Besides her knowledge in Quality Assurance and Agile Development Methodology, she is also attracted to UI/UX design, and being good at Photoshopping.
