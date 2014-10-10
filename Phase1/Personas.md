@@ -5,3 +5,7 @@
 # Persona #2: 
   - Dr. Johnson, 57 years old, from Toronto
   - Dr. Johnson has been teaching Chemistry at U of T and doing researches at Lash Miller Chemical Laboratories for nearly 30 years. He lives in Newmarket and drives to downtown on weekdays. He has classes every Monday, Wednesday, and Thursday. Dr. Johnson completed his bachelor degree in Chemistry at U of T, and PhD in Chemistry at MIT. He has dedicated his entire life to researches, and is still single, but recently he started to think of getting married to not being alone.
+
+# Persona #3:
+  - Jeffery, 21 years old, from Serbia
+  - Jeffery is a 3rd year Computer Science student at UTSG. He lives in the New College dorm because it's close to Bahen Centre, where he spends most of his time at. Jeffery is always with his computer and phone to study and stay connected. He is the president of the Computer Science Student Union(CSSU); He organizes all kinds of events for CSSU, like the UofTHacks and Game Night. Jeffery enjoys his social life more than study. Although he's busy for school, he goes to nightclubs every Friday, drinking and meeting new friends there.
