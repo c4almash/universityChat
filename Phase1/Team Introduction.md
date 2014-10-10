@@ -18,7 +18,7 @@
   - **g3abby** - g3abby
     - As a student specializing in Computer Science in UTSG, Abby started her PEY after 3rd year, currently working as a full-time Test Automation Developer at Trapezegroup. She has plenty of experience in issue investigation and writing automated test scripts for regression test. Besides her knowledge in Quality Assurance and Agile Development Methodology, she is also attracted to UI/UX design, and being good at Photoshopping.
   
-  - **oneohtrix** - g3wu
+- **Lawrence Wu** - g3wu
     - Lawrence is a third year Computer Science student at UTSG specializing
       in Computer Systems. He is interested in full-stack web development,
       programming languages, data structures, and systems design and
