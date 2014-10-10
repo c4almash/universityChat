@@ -7,7 +7,9 @@
 ## > [Release & Iteration Planning](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Release%20%26%20Iteration%20Planning.md)
 ## > [CRC Cards](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/CRC%20cards.md)
 
-# Project, Phase 1 - Planning
+__________________________________________________________________________________________________________________
+
+# CSC301 Project: Phase 1 (Handout)
 
 For the first phase of the project, you will be using the various planning techniques we've learned in order to get ready for building your product. There are two main goals to this phase:
  * Understanding what product you want to build, and planning your first few steps.
