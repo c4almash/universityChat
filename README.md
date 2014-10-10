@@ -1,6 +1,6 @@
 # Deliverables
 ## > [Team Introduction](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team%20Introduction.md)
-### &nbsp;&nbsp; - [Team Photo](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team_Picture.jpg)
+### &nbsp; - [Team Photo](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team_Picture.jpg)
 ## > [About Project](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/About%20project.md)
 ## > [Personas](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Personas.md)
 ### &nbsp;&nbsp; - Photos
