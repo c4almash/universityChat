@@ -1,7 +1,7 @@
 ## Introducing the team
 
 - Team picture
-    (To be taken)
+    ![Team 1](Team_Picture.jpg)
     
 - Biography (Please add your bio down below)
   - g3aishih
