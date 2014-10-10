@@ -1,6 +1,6 @@
 # Deliverables
 ## > [Team Introduction](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Team%20Introduction.md)
-## > [About Project](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/About%20project.md)
+## > [Project Choice](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/About%20project.md)
 ## > [Personas](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/Personas.md)
 ## > [User Stories](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/User%20Stories.md)
 ## > [MVP](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/dev/Phase1/MVP.md)
