@@ -1,5 +1,5 @@
 # Persona #1: 
-  - Brenda, 22 years old, from Kitchener
+  - ![Brenda, 22 years old, from Kitchener](Persona_Brenda.png "Brenda, 22 years old, from Kitchener")
   - Brenda is a 4th year Sociology student at UTSG. She lives near campus with a roommate and walks 20 minutes to school 5 days a week. Brenda likes to study at Robarts Library before and after classes; she eats at food trucks; She volunteers at Royal Ontario Museum two days a week. Brenda is a good student who is on Dean's list every year and is always the first one in class to know any new information about her courses. She is graduating this year, so she is looking for a full-time position starting next June.
   
 # Persona #2: 
