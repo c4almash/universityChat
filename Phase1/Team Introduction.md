@@ -40,7 +40,7 @@
       His main area of interest is web design and development and hence he is the web admin for multiple student organisations.
       Yahya has an abundance of experience in Java, HTML/CSS and Python. Yahya has been a part of multiple project based design       courses and has taken several management courses and is currently focusing on E-Business operation.
  
-  - **AlexDar** - c4darmin
+  - **Alexei Darmin** - c4darmin
     - I'm a 4th year compsci student enrolled in UTSC but taking a semester
       at UTSG. I've worked part time as a web developer for almost two years
       and enjoy working on the UI/UX as much as the full software development
