@@ -4,7 +4,7 @@
 ## > [Personas](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/Personas.md)
 ## > [User Stories](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/User%20Stories.mdd)
 ## > [MVP](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/MVP.md)
-## > [Release & Iteration Planning]https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/Release%20%26%20Iteration%20Planning.md)
+## > [Release & Iteration Planning](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/Release%20%26%20Iteration%20Planning.md)
 ## > [CRC Cards](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/CRC%20cards.md)
 
 __________________________________________________________________________________________________________________
