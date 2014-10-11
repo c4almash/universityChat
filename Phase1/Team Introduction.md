@@ -3,15 +3,15 @@
 - Team picture
     ![Team 1](Team_Picture.jpg)
     
-- Biography (Please add your bio down below)
+- Biography
   - **Shihan Ai** - g3aishih
     - Shihan is a 3rd year computer science student in UTSG.
         He likes to program with Java and develop Android applications.
-        He also enjoys designing websites.
-        Worked with the MIE department at UofT in the summer to create a Twitter bot
-        where he learned about NLP and about other backend parts of a web application.
+        He also enjoys designing websites. Worked with the MIE department
+        at UofT in the summer to create a Twitter bot where he learned
+        about NLP and about other backend parts of a web application.
 
-  - **SunnyLi** - g3sunny
+  - **Sunny Li** - g3sunny
     - Sunny is a 3rd year compsci student studying in UTSG, he is very
       passionate about programming and like to code with perfection.
       He is knowledgeable with git revision control and he uses it to
