@@ -3,7 +3,7 @@
 - Team picture
     ![Team 1](Team_Picture.jpg)
     
-- Biography
+- Biographies
   - **Shihan Ai** - g3aishih
     - Shihan is a 3rd year computer science student in UTSG.
         He likes to program with Java and develop Android applications.
