@@ -1,3 +1,5 @@
+##User Stories
+
 * User story #1:
   - As Brenda, I want to post messages to course SOC499, so that I can ask questions whenever I have problems.
 
