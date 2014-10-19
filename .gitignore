@@ -6,4 +6,5 @@
 berri.pem
 .module-cache/
 .sass-cache/
+node_modules/
 dump.rdb
