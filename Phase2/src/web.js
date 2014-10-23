@@ -2,6 +2,7 @@
 // Base dependencies
 var logfmt = require("logfmt");
 var express = require("express");
+var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var io = require("socket.io");
 // Start up express server
@@ -11,6 +12,8 @@ var server = app.listen(8080);
 var io = io.listen(server);
 // Library for managing redis
 var rooms = require("./rooms");
+// Library for managing users
+var users = require("./users");
 
 // CONFIGURATION
 // Logging
@@ -19,6 +22,8 @@ app.use(logfmt.requestLogger());
 app.enable("trust proxy");
 // For parsing body for post params
 app.use(bodyParser.urlencoded({ extended: false }));
+// For parsing cookies
+app.use(cookieParser());
 
 // SERVER
 // Serve static assets
@@ -26,50 +31,49 @@ app.use("/static", express.static(__dirname + "/public"));
 
 // User visited root
 app.get("/", function(req, res) {
-  var ip = req.ip;
-  console.log("a user visited root with ip " + ip);
-  rooms.doesRoomExist(ip, function(exists) {
-    if (exists) {
-      rooms.getRoom(ip, function(room) {
-        res.redirect(room);
-      });
+  // instead of checking whether room exists, check whether
+  // user is signed in
+  var cookie = req.cookies.token;
+
+  users.isLoggedIn(cookie, function(loggedIn) {
+    if (loggedIn) {
+      res.sendFile("public/html/chat.html", {"root": __dirname});
     } else {
       res.sendFile("public/html/index.html", {"root": __dirname});
     }
   });
 });
 
+// User signed up
+app.post("/register", function(req, res) {
+  var email = req.body.email,
+      password = req.body.password;
+
+  users.registerUser(email, password, function() {
+    // should do error checking here
+    users.authenticate(email, password, function(cookie) {
+      res.cookie("token", cookie);
+      res.redirect("/");
+    });
+  });
+});
+
+// User logged in
+app.post("/login", function(req, res) {
+  var email = req.body.email,
+      password = req.body.password;
+
+  users.authenticate(email, password, function(cookie) {
+      res.cookie("token", cookie);
+      res.redirect("/");
+  });
+});
+
+
 // User asked to create a room
 app.post("/", function(req, res) {
   rooms.createRoom(req.ip, req.body.privacy, function(room) {
     res.redirect(room);
-  });
-});
-
-// User visited something other than root
-// (probably a room)
-app.get("*", function(req, res) {
-  var ip = req.ip;
-  var path = req.path.replace("/", "");
-  // check path of room and see whether room is privacy
-  rooms.roomPrivacy(path, function(privacy) {
-    // if privacy, only let user in if the ip related
-    // to him is the room's
-    if (privacy == "private") {
-      rooms.getRoom(ip, function(room) {
-        if (room == path) {
-          res.sendFile("public/html/chat.html", {"root": __dirname});
-        } else {
-          res.send("Sorry, but you're not allowed.");
-        }
-      });
-    // if it's public, doesn't matter
-    } else if (privacy == "public") {
-      res.sendFile("public/html/chat.html", {"root": __dirname});
-    } else {
-      // room is not defined yet
-      res.send("This room has not been created yet.");
-    }
   });
 });
 
