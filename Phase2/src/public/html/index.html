@@ -10,7 +10,18 @@
   <body>
     <div id="landing">
         <!-- React JS component for registering/logging in -->
-        Register or Login
+        Register
+        <form action="register" method="POST">
+            email: <input type="text" name="email">
+            password: <input type="password" name="password">
+            <input type="submit" value="Register">
+        </form>
+        Login
+        <form action="login" method="POST">
+            email: <input type="text" name="email">
+            password: <input type="password" name="password">
+            <input type="submit" value="Login">
+        </form>
     </div>
   </body>
 </html>
