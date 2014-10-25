@@ -49,12 +49,15 @@ app.post("/register", function(req, res) {
   var email = req.body.email,
       password = req.body.password;
 
-  users.registerUser(email, password, function() {
-    // should do error checking here
-    users.authenticate(email, password, function(cookie) {
-      res.cookie("token", cookie);
-      res.redirect("/");
-    });
+  users.registerUser(email, password, function(err) {
+    if (err) {
+      res.status(500).json({error: err});
+    } else {
+      users.authenticate(email, password, function(cookie) {
+        res.cookie("token", cookie);
+        res.redirect("/");
+      });
+    }
   });
 });
 
