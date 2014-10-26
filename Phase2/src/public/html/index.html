@@ -3,23 +3,28 @@
   <head>
     <title>UTutor</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/flat-ui-pro.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="../css/styleRESP.css" type="text/css">
-
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/flat-ui-pro.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
   </head>
-  <body>
+  <body id="homepage">
     <div id="landing">
-        <!-- React JS component for registering/logging in -->
+      <h5 class="text-center">Start a Conversation.</h5>
 
-        <form class="login col-xs-10 col-sm-8 col-md-6 col-lg-4" action="login" method="POST">
-            <label>Email:</label> <input type="text" name="email">
-            <label>Password:</label> <input type="password" name="password">
-            <input type="submit" value="Login">
-        </form>
+      <form class="login-form" action="login" method="POST">
+        <div class="form-group">
+          <input type="text" id="login-email" placeholder="Enter your UofT email" value="" class="form-control login-field">
+          <label for="login-email" class="login-field-icon fui-user"></label>
+        </div>
 
-        <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
+        <div class="form-group">
+          <input type="password" id="login-pass" placeholder="Password" value="" class="form-control login-field">
+          <label for="login-pass" class="login-field-icon fui-lock"></label>
+        </div>
+
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
+        <a href="#" class="login-link">Lost your password?</a>
+      </form>
     </div>
   </body>
 </html>
