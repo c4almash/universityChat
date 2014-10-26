@@ -79,7 +79,7 @@ var UsernameModal = React.createClass({displayName: 'UsernameModal',
     this.setState({tentativeUsername: e.target.value});
   },
   handleSubmit: function(e) {
-    if (e.charCode == 13) {
+    if (e.which == 13) {
       e.preventDefault();
       this.submitUsername();
       this.setState({text: ""});
@@ -103,7 +103,7 @@ var UsernameModal = React.createClass({displayName: 'UsernameModal',
                 React.DOM.input({type: "text", id: "username-input", 
                        className: "form-control", 
                        onChange: this.handleTyping, 
-                       onKeyPress: this.handleSubmit}
+                       onKeyDown: this.handleSubmit}
                        )
               ), 
 
@@ -159,7 +159,7 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
     this.setState({text: e.target.value});
   },
   handleEnter: function(e) {
-    if (e.charCode == 13 && !e.shiftKey) {
+    if (e.which == 13 && !e.shiftKey) {
       e.preventDefault();
       var message = { author: this.props.username, text: this.state.text };
       socket.emit("message", message);
@@ -170,7 +170,7 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
         return (
         React.DOM.textarea({id: "message-input", 
                   placeholder: "Write message...", value: this.state.text, 
-                  onChange: this.messageUpdated, onKeyPress: this.handleEnter, 
+                  onChange: this.messageUpdated, onKeyDown: this.handleEnter, 
                   className: "animated"}
         )
     );
