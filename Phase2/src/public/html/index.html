@@ -13,13 +13,10 @@
     <div id="landing">
         <!-- React JS component for registering/logging in -->
 
-        <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>
-
-        <form class="login col-xs-10 col-sm-8 col-md-6 col-lg-4">
-          <div>
-          <label>Username:</label> <input type="text" name="firstname"><br />
-          <label>Password:</label> <input type="password" name="password"><br />
-          </div>
+        <form class="login col-xs-10 col-sm-8 col-md-6 col-lg-4" action="login" method="POST">
+            <label>Email:</label> <input type="text" name="email">
+            <label>Password:</label> <input type="password" name="password">
+            <input type="submit" value="Login">
         </form>
 
         <div class="col-xs-1 col-sm-2 col-md-3 col-lg-4"></div>

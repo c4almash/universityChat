@@ -2,8 +2,6 @@
 var redis = require("redis"),
     client = redis.createClient();
 
-console.log("redis client connecting...");
-
 // Error logging
 client.on("error", function(err) {
   console.log("redis error: " + err);
