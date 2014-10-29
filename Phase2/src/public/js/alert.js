@@ -11,7 +11,9 @@ $(function () {
     document.cookie = name + "=;";
   }
 
-  $("#landing").prepend($('<div/>', {'class': 'alert alert-info',
+  if (message) {
+    $("#landing").prepend($('<div/>', {'class': 'alert alert-info',
                                      role: 'alert', text: message}));
+  }
   eraseCookie('alert');
 });
