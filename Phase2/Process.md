@@ -46,9 +46,10 @@ We implemented a simple responsive login so that users may easily login in as we
 
 
 <h1>GitHub Issue management</h1>
-
-
-
+<u1>
+We used Issued infrequently; we often fixed the code individually or did not commit the code until it was ready. 
+For scenarios which Issues were used, we often Issued bugs that were found in the code after a commit.
+</ul>
 
 
 
