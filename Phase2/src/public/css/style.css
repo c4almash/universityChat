@@ -1,31 +1,34 @@
-#landing {
-  margin-left: auto;
-  margin-right: auto;
-  width: 20em; }
-  #landing h3, #landing h5, #landing h6, #landing p {
-    text-align: center; }
-  #landing .section {
-    width: 9em; }
-    #landing .section p {
-      text-align: left;
-      line-height: 1.2em;
-      font-size: 0.6em; }
-    #landing .section a {
-      margin-left: 2.3em; }
-  #landing #private {
-    float: left; }
-    #landing #private img {
-      margin-top: -0.2em;
-      width: 1em; }
-  #landing #public {
-    float: right; }
-    #landing #public img {
-      margin-top: -0.1em;
-      width: 1em; }
-  #landing #nb {
-    margin-top: 1.2em;
-    font-size: 0.5em;
-    line-height: 1.2em; }
+#homepage {
+  background-color: #3498db; }
+  #homepage #landing {
+    margin: 0 auto;
+    margin-top: 5em;
+    width: 20em; }
+    #homepage #landing h5 {
+      color: #ddd; }
+    #homepage #landing .login-form {
+      background-color: #ecf0f1;
+      border-radius: 8px;
+      padding: 20px;
+      position: relative; }
+      #homepage #landing .login-form .form-group {
+        margin-bottom: 20px;
+        position: relative; }
+        #homepage #landing .login-form .form-group .login-field:not(:focus) {
+          border-color: transparent; }
+        #homepage #landing .login-form .form-group .login-field-icon {
+          color: #bdc3c7;
+          font-size: 16px;
+          position: absolute;
+          right: 15px;
+          top: 3px;
+          transition: all 0.25s ease 0s; }
+      #homepage #landing .login-form .login-link {
+        color: #bdc3c7;
+        display: block;
+        font-size: 13px;
+        margin-top: 15px;
+        text-align: center; }
 
 * {
   -webkit-box-sizing: border-box;

@@ -32,10 +32,10 @@ from sass (sass-lang.com) in the `scss/` folder. Edit the files there and then c
 
 `html/` contains the html files that are sent in the response.
 
-`js/` contains the javascript libraries that are loaded for the chat (like socket.io and the React components). Feel free to add
-any other necessary libraries. However, do not modify the React files here! They are, like the css files, compiled from the
-jsx files.
+`js/` contains the javascript libraries that are loaded for the chat (like socket.io and the React components).
+Feel free to add any other necessary libraries. However, do not modify the React files here! They are, like the
+css files, compiled from the jsx files.
 
 `jsx/` has the source React components. If you are working on the front-end you should be working mostly in this directory.
 
-`scss/` contains the source stylesheet files. If you are working on the fnort-end and design you should be working mostly in this directory.
+`scss/` contains the source stylesheet files. If you are working on the front-end design you should be working mostly in this directory.
