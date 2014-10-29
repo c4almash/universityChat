@@ -11,7 +11,7 @@ $(function () {
     document.cookie = name + "=;";
   }
 
-  if (message) {
+  if (message && message != "null") {
     $("#landing").prepend($('<div/>', {'class': 'alert alert-info',
                                      role: 'alert', text: message}));
   }
