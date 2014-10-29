@@ -79,13 +79,25 @@ app.post("/", function(req, res) {
   });
 });
 
+function startsWith(base, str) {
+  return base.substring( 0, str.length ) === str;
+}
+
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
   // This is the room name (pathname)
   var room = socket.handshake.headers.referer.split("/").slice(-1)[0];
   var username = null;
-  console.log("a user with ip " + socket.handshake.address.address + " connected to room " + room);
+
+  var cookies = socket.handshake.headers.cookie.split("; ");
+
+  for (var i = 0; i < cookies.length; i++) {
+    if (startsWith(cookies[i], "token=")) {
+      username = cookies[i].replace("token=", "").replace(/\%40(.*)/, "");
+    }
+  }
+
   socket.join(room);
 
   // Initializing client-side...
