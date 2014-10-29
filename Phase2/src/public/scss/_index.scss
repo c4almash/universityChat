@@ -1,42 +1,46 @@
-#landing {
-  margin-left: auto;
-  margin-right: auto;
-  width: 20em;
-  h3, h5, h6, p {
-    text-align: center;
-  }
+#homepage {
+  background-color: #3498db;
 
-  .section {
-    width: 9em;
-    p {
-      text-align: left;
-      line-height: 1.2em;
-      font-size: 0.6em ;
+  #landing {
+    margin: 0 auto;
+    margin-top: 5em;
+    width: 20em;
+    
+    h5 {
+      color: #ddd;
     }
-    a {
-      margin-left: 2.3em;
-    }
-  }
 
-  #private {
-    float: left;
-    img {
-      margin-top: -0.2em;
-      width: 1em;
-    }
-  }
+    .login-form {
+      background-color: #ecf0f1;
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
 
-  #public {
-    float:right;
-    img {
-      margin-top: -0.1em;
-      width: 1em;
-    }
-  }
+      .form-group {
+        margin-bottom: 20px;
+        position: relative;
 
-  #nb {
-    margin-top: 1.2em;
-    font-size: 0.5em;
-    line-height: 1.2em;
+        .login-field:not(:focus) {
+          border-color: transparent;
+        }
+
+        .login-field-icon {
+          color: #bdc3c7;
+          font-size: 16px;
+          position: absolute;
+          right: 15px;
+          top: 3px;
+          transition: all 0.25s ease 0s;
+        }
+      }
+
+      .login-link {
+        color: #bdc3c7;
+        display: block;
+        font-size: 13px;
+        margin-top: 15px;
+        text-align: center;
+      }
+    }
   }
 }

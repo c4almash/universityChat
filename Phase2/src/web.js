@@ -44,31 +44,30 @@ app.get("/", function(req, res) {
   });
 });
 
-// User signed up
-app.post("/register", function(req, res) {
-  var email = req.body.email,
-      password = req.body.password;
-
-  users.registerUser(email, password, function(err) {
-    if (err) {
-      res.status(500).json({error: err});
-    } else {
-      users.authenticate(email, password, function(cookie) {
-        res.cookie("token", cookie);
-        res.redirect("/");
-      });
-    }
-  });
-});
-
-// User logged in
+// User sign-up / logged in
 app.post("/login", function(req, res) {
   var email = req.body.email,
       password = req.body.password;
 
   users.authenticate(email, password, function(cookie) {
+    if (cookie) {
+      // login success
       res.cookie("token", cookie);
       res.redirect("/");
+    } else {
+      // invalid info, treat it as sign-up
+      users.registerUser(email, password, function(err) {
+        if (err) {
+          // user already exist => wrong sign-in info
+          res.cookie("alert", err);
+        } else {
+          // registeriation success, prompt sign-in
+          res.cookie("alert", "Congratz, you are now one of us. " +
+            "Sign-in again with the same credential you've just used.");
+        }
+        res.redirect("/");
+      });
+    }
   });
 });
 
