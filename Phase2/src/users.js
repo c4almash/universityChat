@@ -65,11 +65,15 @@ function authenticate(email, password, callback) {
 
 // finds user, calls callback with true or false
 function isLoggedIn(cookie, callback) {
-  if (cookie) {
-    callback(true);
-  } else {
-    callback(false);
-  }
+  var key = "user:" + cookie;
+
+  client.exists(key, function(err, reply) {
+    if (reply) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
 }
 
 exports.registerUser = registerUser;

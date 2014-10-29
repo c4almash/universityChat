@@ -4,7 +4,6 @@
 var Chat = React.createClass({displayName: 'Chat',
   getInitialState: function() {
     return {
-      gettingUsername: true,
       username: null,
       users: [],
       ip: null,
@@ -23,16 +22,11 @@ var Chat = React.createClass({displayName: 'Chat',
   },
   initialize: function(data) {
     this.setState({
-      username: null,
+      username: data.username,
       users: data.users,
-      ip: data.ip,
       messages: data.messages
     });
     scrollChatToBottom();
-  },
-  usernameWasSet: function(username) {
-    this.setState({username: username, gettingUsername: false});
-    document.getElementById("message-input").focus();
   },
   getMessage: function(message) {
     this.setState({messages: this.state.messages.concat([message])});
@@ -55,9 +49,6 @@ var Chat = React.createClass({displayName: 'Chat',
   render: function() {
     return (
       React.DOM.div(null, 
-        UsernameModal({active: this.state.gettingUsername, 
-                       usernameWasSet: this.usernameWasSet}
-        ), 
         React.DOM.div({id: "chat"}, 
           UserList({username: this.state.username, users: this.state.users}), 
           Conversation({messages: this.state.messages}), 
@@ -68,63 +59,15 @@ var Chat = React.createClass({displayName: 'Chat',
   }
 });
 
-var UsernameModal = React.createClass({displayName: 'UsernameModal',
-  componentDidMount: function() {
-    document.getElementById("username-input").focus();
-  },
-  getInitialState: function() {
-    return {tentativeUsername: ''}
-  },
-  handleTyping: function(e) {
-    this.setState({tentativeUsername: e.target.value});
-  },
-  handleSubmit: function(e) {
-    if (e.which == 13) {
-      e.preventDefault();
-      this.submitUsername();
-      this.setState({text: ""});
-    }
-  },
-  submitUsername: function() {
-    console.log("emitting username...");
-    var username = this.state.tentativeUsername;
-    socket.emit("username", username);
-    this.props.usernameWasSet(username);
-  },
-  render: function() {
-    if (this.props.active) {
-      return (
-        React.DOM.div({className: "modal"}, 
-          React.DOM.div({className: "modal-dialog"}, 
-            React.DOM.div({className: "modal-content"}, 
-              
-              React.DOM.div({className: "modal-body"}, 
-                React.DOM.h4(null, "Enter your username"), 
-                React.DOM.input({type: "text", id: "username-input", 
-                       className: "form-control", 
-                       onChange: this.handleTyping, 
-                       onKeyDown: this.handleSubmit}
-                       )
-              ), 
-
-              React.DOM.div({className: "modal-footer"}, 
-                React.DOM.a({onClick: this.submitUsername, className: "btn btn-primary btn-wide"}, "Enter room")
-              )
-            )
-          )
-        )
-        );
-    } else {
-      return null;
-    }
-  }
-});
-
 var UserList = React.createClass({displayName: 'UserList',
   render: function() {
     var renderUser = function(user) {
-      return (React.DOM.li(null, user));
-    }
+      if (user == this.props.username) {
+        return null;
+      } else {
+        return (React.DOM.li(null, user));
+      }
+    }.bind(this);
     return (React.DOM.aside(null, 
       React.DOM.ul(null, 
         this.props.username ? React.DOM.li({id: "user"}, this.props.username) : null, 

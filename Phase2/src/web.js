@@ -79,39 +79,41 @@ app.post("/", function(req, res) {
   });
 });
 
+function startsWith(base, str) {
+  return base.substring( 0, str.length ) === str;
+}
+
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
   // This is the room name (pathname)
-  var room = socket.handshake.headers.referer.split("/").slice(-1)[0];
+  var room = "global";
   var username = null;
-  console.log("a user with ip " + socket.handshake.address.address + " connected to room " + room);
+
+  var cookies = socket.handshake.headers.cookie.split("; ");
+
+  for (var i = 0; i < cookies.length; i++) {
+    if (startsWith(cookies[i], "token=")) {
+      username = cookies[i].replace("token=", "").replace(/\%40(.*)/, "");
+    }
+  }
+
   socket.join(room);
+  io.to(room).emit("join", username);
+  rooms.addUser(room, username);
 
   // Initializing client-side...
   console.log("initializing user...");
   rooms.getData(room, function(users, messages) {
     var users = users;
-    var ip = socket.handshake.address.address;
     var messageHistory = messages.map(JSON.parse);
     socket.emit("initialize", {
+      username: username,
       users: users,
-      ip: ip,
       messages: messageHistory
     });
   });
 
-  // User initialized their username
-  socket.on("username", function(newUsername) {
-    username = newUsername;
-    // emit a join
-    io.to(room).emit("join", username);
-    // add user to room in redis (have to do it here
-    // since we manually put username in client so
-    // it won't appear twice)
-    rooms.addUser(room, username);
-  });
-  
   // On receiving a message from the user
   socket.on("message", function(msg) {
     io.to(room).emit("message", msg);
