@@ -1,3 +1,6 @@
+# Deliverables (Phase 2)
+## > [Product](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase2/Product.md)
+## > [Process](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase2/Process.md)
 # Deliverables (Phase 1)
 ## > [Team Introduction](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/Team%20Introduction.md)
 ## > [Project Choice](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/blob/master/Phase1/About%20project.md)
