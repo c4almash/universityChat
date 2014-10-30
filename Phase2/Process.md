@@ -43,7 +43,6 @@ We implemented a simple responsive login so that users may easily login in as we
 
 
 <h1>Daily Scrum Meetings</h1>
-Daily Scrum Meetings
 
 Oct. 18	Location: Facebook
   - oneohtrix - Set up the basic chat with socket.io
