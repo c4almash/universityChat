@@ -102,3 +102,12 @@ textarea {
   resize: none; }
 
 /*# sourceMappingURL=style.css.map */
+
+.control {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 15%;
+  background-color: black;
+}

@@ -76,6 +76,31 @@ function isLoggedIn(cookie, callback) {
   });
 }
 
+/* PHASE 3 FUNCTIONS */
+function getPassword(email, callback) {
+  var key = "user:" + email;
+  client.hget(key, "password", function(err, reply) {
+  callback(reply);
+  });
+}
+
+function userExists(email, callback) {
+  var key = "user:" + email;
+
+  client.exists(key, function(err, reply) {
+    if (reply) {
+      callback(null);
+    } else {
+      var error = "We couldn't find that email, try again?";
+      callback(error);
+    }
+  });
+}
+
+/* END OF PHASE 3 FUNCTIONS */
+
 exports.registerUser = registerUser;
 exports.authenticate = authenticate;
 exports.isLoggedIn = isLoggedIn;
+exports.getPassword = getPassword;
+exports.userExists = userExists;

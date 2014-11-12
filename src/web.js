@@ -5,6 +5,7 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var io = require("socket.io");
+var nodeMailer = require("nodemailer");
 // Start up express server
 var app = express();
 var server = app.listen(8080);
@@ -67,6 +68,41 @@ app.post("/login", function(req, res) {
         }
         res.redirect("/");
       });
+    }
+  });
+});
+
+// Forgot password
+app.get("/forgotpassword", function(req, res) {
+  res.sendFile("public/html/forgotpassword.html", {"root": __dirname});
+});
+
+app.post("/forgot-password", function(req, res) {
+  var email = req.body.email;
+  users.userExists(email, function(err) {
+    if (err) {
+      // email not found
+      res.cookie("alert", err);
+      res.redirect("/forgotpassword");
+    } else {
+      var transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'csc301ututor@gmail.com',
+          pass: 'team1ututor'
+        }
+      });
+      
+      users.getPassword(email, function(cookie) {
+        transporter.sendMail({
+          from: 'csc301ututor@gmail.com',
+          to: email,
+          subject: 'Password recovery',
+          text: "Your password is: " + cookie
+        });
+      });
+      res.cookie("alert", "Password sent to " + email);
+      res.redirect("/");
     }
   });
 });
