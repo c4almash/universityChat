@@ -99,7 +99,7 @@ io.on("connection", function(socket) {
   }
 
   socket.join(room);
-  io.to(room).emit("join", username);
+  socket.broadcast.to(room).emit("join", username);
   rooms.addUser(room, username);
 
   // Initializing client-side...

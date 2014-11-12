@@ -6,7 +6,6 @@ var Chat = React.createClass({
     return {
       username: null,
       users: [],
-      ip: null,
       messages: []
     };
   },
@@ -33,27 +32,20 @@ var Chat = React.createClass({
     scrollChatToBottom();
   },
   userJoined: function(user) {
-    // since server emits a join when this user joins,
-    // we have to ignore for that case
-    if (this.state.username != user) {
-      this.setState({users: this.state.users.concat([user])});
-    }
-    scrollChatToBottom();
+    // add user that joined room to the user list
+    this.setState({users: this.state.users.concat([user])});
   },
   userQuit: function(user) {
-    var newUsers = this.state.users.slice();
-    newUsers.splice(newUsers.indexOf(user));
+    var newUsers = this.state.users;
+    newUsers.splice(newUsers.indexOf(user), 1);
     this.setState({users:newUsers});
-    scrollChatToBottom();
   },
   render: function() {
     return (
-      <div>
-        <div id="chat">
-          <UserList username={this.state.username} users={this.state.users} />
-          <Conversation messages={this.state.messages} />
-          <MessageInput username={this.state.username} />
-        </div>
+      <div id="chat">
+        <UserList username={this.state.username} users={this.state.users} />
+        <Conversation messages={this.state.messages} />
+        <MessageInput username={this.state.username} />
       </div>
     );
   }
@@ -68,12 +60,14 @@ var UserList = React.createClass({
         return (<li>{user}</li>);
       }
     }.bind(this);
-    return (<aside>
-      <ul>
-        {this.props.username ? <li id="user">{this.props.username}</li> : null}
-        {this.props.users.map(renderUser)}
-      </ul>
-    </aside>);
+    return (
+      <aside>
+        <ul>
+          {this.props.username ? <li id="user">{this.props.username}</li> : null}
+          {this.props.users.map(renderUser)}
+        </ul>
+      </aside>
+    );
   }
 });
 
@@ -110,12 +104,11 @@ var MessageInput = React.createClass({
     }
   },
   render: function() {
-        return (
-        <textarea id="message-input"
-                  placeholder="Write message..." value={this.state.text}
-                  onChange={this.messageUpdated} onKeyDown={this.handleEnter}
-                  className="animated"
-        />
+    return (
+      <textarea id="message-input" className="animated"
+                placeholder="Write message..." value={this.state.text}
+                onChange={this.messageUpdated} onKeyDown={this.handleEnter}
+      />
     );
   }
 });
