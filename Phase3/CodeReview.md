@@ -1,14 +1,14 @@
 # Code Review
 
-| Reviewer | Coder |
-| -------- | ----- |
-| oneohtrix |  SunnyLi |
-| AlexDar |  c4almash |
-| c4almash |  oneohtrix |
-| timothylai |  g3aishih |
-| g3aishih |  timothylai |
-| SunnyLi |  g3abby |
-| g3abby |  AlexDar |
+| Reviewer   | Coder         |
+| --------   | -----         |
+| oneohtrix  |  SunnyLi      |
+| AlexDar    |  c4almash     |
+| c4almash   |  oneohtrix    |
+| timothylai |  g3aishih     |
+| g3aishih   |  timothylai   |
+| SunnyLi    |  g3abby       |
+| g3abby     |  AlexDar      |
 
 -----
 
@@ -46,6 +46,8 @@ These commits gave me great ideas which made me decide to improve it with PR
 -----
 
 ## Reviewer : c4almash
+ * He found a serious issue in the login interface
+
 
 -----
 
