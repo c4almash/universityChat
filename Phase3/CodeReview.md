@@ -36,6 +36,11 @@
 -----
 
 ## Reviewer : g3aishih
+ * Timothy worked with Sunny to redesign the homepage login. (#24 commit c85ea01)
+ * The <form> tags now appear to be properly defined in index.html
+ * They got rid of unneeded css files (styleRESP.css) so there's less junk in our src folder
+ * I like the simple design, combining the power of bootstrap and our own css
+ * Good use of classes in the html/css, pretty clean css
 
 -----
 
