@@ -35,6 +35,7 @@
 * Implementing the back button for the lost password page makes it much easier for navigation.
 * The lost password function works excellent without faults with the nodemailer package.
 * The interface and code is simple and corresponds well with our current interfaces.
+* Forgot-password.HTML follows the same design schema and is consistant with the login page
 
 -----
 
