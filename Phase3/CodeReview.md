@@ -46,7 +46,10 @@ These commits gave me great ideas which made me decide to improve it with PR
 -----
 
 ## Reviewer : c4almash
- * He found a serious issue in the login interface
+ * He found a serious bug in the chat interface and he fixed it at [here](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/commit/b457ee843d8be48281ce3cf117e15692f499a434), The bug had been hard to track and he did on the spot before our demonstration which shows deep knowledge of the code and the ability to carry out a fast resolve. 
+ * He made the starter code for the app, which used a few neat implementations including a node.js server and redis database at [here](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/commit/5a3f62fc86a32c097b5a1cc5f0640589dd349362).
+ * I would suggest better documentation (docstrings) in the code, although he walked the team through most of it, sometimes it’s good to have some reference/manual to go back to.
+
 
 
 -----
