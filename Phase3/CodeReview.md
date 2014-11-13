@@ -27,6 +27,7 @@
  * He found a npm bug and then implemented a clever solution commit c736cca7e43e77ef0aba0f22881198abef1b6e93
  * I find it impressive the speed with which he implemented the solution and also the decision to fix it himself instead of opening up an issue and possibly waiting a long time for someone else to tackle the problem.
  * I suggested he document at least some parts of the issue (at mininum the original cause, as well as the fix -> if not in an issue log then perhaps as a comment in the code)
+
 -----
 
 ## Reviewer : c4almash
