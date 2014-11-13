@@ -1,19 +1,23 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
-1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'install' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
-4 error Error: ENOENT, stat 'C:\Users\Shihan\AppData\Roaming\npm'
-5 error If you need help, you may report this *entire* log,
-5 error including the npm and node versions, at:
-5 error     <http://github.com/npm/npm/issues>
-6 error System Windows_NT 6.2.9200
-7 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
-8 error cwd c:\Users\Shihan\desktop\proj-evening-team1-repo\phase3\src
-9 error node -v v0.10.33
-10 error npm -v 1.4.28
-11 error path C:\Users\Shihan\AppData\Roaming\npm
-12 error code ENOENT
-13 error errno 34
-14 verbose exit [ 34, true ]
+4 error install Couldn't read dependencies
+5 error Failed to parse json
+5 error Unexpected string
+6 error File: C:\users\yahya\desktop\csc301\proj-evening-team1-repo\src\package.json
+7 error Failed to parse package.json data.
+7 error package.json must be actual JSON, not just JavaScript.
+7 error
+7 error This is not a bug in npm.
+7 error Tell the package author to fix their package.json file. JSON.parse
+8 error System Windows_NT 6.2.9200
+9 error command "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+10 error cwd C:\users\yahya\desktop\csc301\proj-evening-team1-repo\src
+11 error node -v v0.10.33
+12 error npm -v 1.4.28
+13 error file C:\users\yahya\desktop\csc301\proj-evening-team1-repo\src\package.json
+14 error code EJSONPARSE
+15 verbose exit [ 1, true ]
