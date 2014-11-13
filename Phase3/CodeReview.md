@@ -70,4 +70,7 @@ These commits gave me great ideas which made me decide to improve it with PR
 -----
 
 ## Reviewer : g3abby
- * see example
+ * Fixed the page not open issue in the style sheet. (commit id: adc6c1d)
+ * I found that it's tricky to catch the conflicting style.css files issue which caused page could be loaded. (commit id: 8ec2a9b)
+ * I figured that the HTML front-end login screen he designed is simple and neat. (commit id: 8581e08)
+ * Added the CSS style sheet to make the UI look neat. (commit id: 8ec2a9b87b38e7690dbf8cded5c3aeea61cf2ce2)
