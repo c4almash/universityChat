@@ -21,6 +21,21 @@
 
 ## Reviewer : SunnyLi
 
+Abby did many of the write-ups but not any code related commits through her account as can be seen
+[here](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/commits/master?author=g3abby).
+
+However, she worked with Alex to complete the initial front-end design as seen
+[here](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/compare/8c1dfb50...adc6c1d5).
+
+ * I find the initial markup for the login form a little hackish, that the design wasn't very
+   engaging to users nor does it follow the flat UI design principle which we are using as I noted
+   [here](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/commit/8581e0847f864ba14d7f7e48676111647ba679f7).
+ * I thought that the login form designed with responsiveness in mind was very thoughtful -
+   but it doesn't work very well here in practice..
+
+These commits gave me great ideas which made me decide to improve it with PR
+[#24](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/pull/24)
+
 -----
 
 ## Reviewer : AlexDar
