@@ -5,6 +5,7 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var io = require("socket.io");
+var nodeMailer = require("nodemailer");
 // Start up express server
 var app = express();
 var server = app.listen(8080);
@@ -44,31 +45,65 @@ app.get("/", function(req, res) {
   });
 });
 
-// User signed up
-app.post("/register", function(req, res) {
+// User sign-up / logged in
+app.post("/login", function(req, res) {
   var email = req.body.email,
       password = req.body.password;
 
-  users.registerUser(email, password, function(err) {
-    if (err) {
-      res.status(500).json({error: err});
+  users.authenticate(email, password, function(cookie) {
+    if (cookie) {
+      // login success
+      res.cookie("token", cookie);
+      res.redirect("/");
     } else {
-      users.authenticate(email, password, function(cookie) {
-        res.cookie("token", cookie);
+      // invalid info, treat it as sign-up
+      users.registerUser(email, password, function(err) {
+        if (err) {
+          // user already exist => wrong sign-in info
+          res.cookie("alert", err);
+        } else {
+          // registeriation success, prompt sign-in
+          res.cookie("alert", "Congratz, you are now one of us. " +
+            "Sign-in again with the same credential you've just used.");
+        }
         res.redirect("/");
       });
     }
   });
 });
 
-// User logged in
-app.post("/login", function(req, res) {
-  var email = req.body.email,
-      password = req.body.password;
+// Forgot password
+app.get("/forgotpassword", function(req, res) {
+  res.sendFile("public/html/forgotpassword.html", {"root": __dirname});
+});
 
-  users.authenticate(email, password, function(cookie) {
-      res.cookie("token", cookie);
+app.post("/forgot-password", function(req, res) {
+  var email = req.body.email;
+  users.userExists(email, function(err) {
+    if (err) {
+      // email not found
+      res.cookie("alert", err);
+      res.redirect("/forgotpassword");
+    } else {
+      var transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'csc301ututor@gmail.com',
+          pass: 'team1ututor'
+        }
+      });
+      
+      users.getPassword(email, function(cookie) {
+        transporter.sendMail({
+          from: 'csc301ututor@gmail.com',
+          to: email,
+          subject: 'Password recovery',
+          text: "Your password is: " + cookie
+        });
+      });
+      res.cookie("alert", "Password sent to " + email);
       res.redirect("/");
+    }
   });
 });
 
@@ -80,39 +115,41 @@ app.post("/", function(req, res) {
   });
 });
 
+function startsWith(base, str) {
+  return base.substring( 0, str.length ) === str;
+}
+
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
   // This is the room name (pathname)
-  var room = socket.handshake.headers.referer.split("/").slice(-1)[0];
+  var room = "global";
   var username = null;
-  console.log("a user with ip " + socket.handshake.address.address + " connected to room " + room);
+
+  var cookies = socket.handshake.headers.cookie.split("; ");
+
+  for (var i = 0; i < cookies.length; i++) {
+    if (startsWith(cookies[i], "token=")) {
+      username = cookies[i].replace("token=", "").replace(/\%40(.*)/, "");
+    }
+  }
+
   socket.join(room);
+  socket.broadcast.to(room).emit("join", username);
+  rooms.addUser(room, username);
 
   // Initializing client-side...
   console.log("initializing user...");
   rooms.getData(room, function(users, messages) {
     var users = users;
-    var ip = socket.handshake.address.address;
     var messageHistory = messages.map(JSON.parse);
     socket.emit("initialize", {
+      username: username,
       users: users,
-      ip: ip,
       messages: messageHistory
     });
   });
 
-  // User initialized their username
-  socket.on("username", function(newUsername) {
-    username = newUsername;
-    // emit a join
-    io.to(room).emit("join", username);
-    // add user to room in redis (have to do it here
-    // since we manually put username in client so
-    // it won't appear twice)
-    rooms.addUser(room, username);
-  });
-  
   // On receiving a message from the user
   socket.on("message", function(msg) {
     io.to(room).emit("message", msg);

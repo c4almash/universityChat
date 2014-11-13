@@ -24,22 +24,25 @@ function registerUser(email, password, callback) {
   if (!isValidUofTEmail(email)) {
     var error = "This email is not a valid University of Toronto email address.";
     callback(error);
+    return;
   }
 
   // check that password is not empty
   if (password.length < 5) {
     var error = "Your password must be at least 5 characters.";
     callback(error);
+    return;
   }
 
   // check if key exists already
   client.exists(key, function(err, reply) {
     // if it exists, reply with an error string
     if (reply) {
-      var error = "This email is already being used.";
+      var error = "Invalid login credential";
       callback(error);
+      return;
     }
-    client.set(key, "password", password, function(err, reply) {
+    client.hset(key, "password", password, function(err, reply) {
       callback(null);
     });
   });
@@ -62,13 +65,42 @@ function authenticate(email, password, callback) {
 
 // finds user, calls callback with true or false
 function isLoggedIn(cookie, callback) {
-  if (cookie) {
-    callback(true);
-  } else {
-    callback(false);
-  }
+  var key = "user:" + cookie;
+
+  client.exists(key, function(err, reply) {
+    if (reply) {
+      callback(true);
+    } else {
+      callback(false);
+    }
+  });
 }
+
+/* PHASE 3 FUNCTIONS */
+function getPassword(email, callback) {
+  var key = "user:" + email;
+  client.hget(key, "password", function(err, reply) {
+  callback(reply);
+  });
+}
+
+function userExists(email, callback) {
+  var key = "user:" + email;
+
+  client.exists(key, function(err, reply) {
+    if (reply) {
+      callback(null);
+    } else {
+      var error = "We couldn't find that email, try again?";
+      callback(error);
+    }
+  });
+}
+
+/* END OF PHASE 3 FUNCTIONS */
 
 exports.registerUser = registerUser;
 exports.authenticate = authenticate;
 exports.isLoggedIn = isLoggedIn;
+exports.getPassword = getPassword;
+exports.userExists = userExists;
