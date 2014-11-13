@@ -1,6 +1,24 @@
 ## Kanban Process Report
   * The names of columns your team chose to use for the Kanban board.
     - __Todo__, __Developing__, __Under review__, and __Done__
+    - 
+| Todo          | Selected         | Developing                                          | Done     |
+| ------------- | ---------------- | --------------------------------------------------- | -------- |
+|               |                  |                                                     |          |
+|               |                  |                                                     |          |
+|               |                  |                                                     |          |                        
+|               |                  |                                                     |          |
+|               |                  |                                                     |          |
+|               |                  |                                                     |          |
+|               |                  |                                                     |          |
+
+| Ongoing                         | Under review      |
+| ------------------------------- | ----------------- |      
+|                                 |                   |                               
+|                                 |                   |       
+|                                 |                   |        
+|                                 |                   |          
+|                                 |                   |  
   * The WIP (work in progress) limit(s) you chose.     
     - 3
   * Details on how you used GitHub issues - Labels, naming conventions, enforcing WIP limits, etc.
