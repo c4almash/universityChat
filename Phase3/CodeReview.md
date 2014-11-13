@@ -5,8 +5,8 @@
 | oneohtrix |  SunnyLi |
 | AlexDar |  c4almash |
 | c4almash |  oneohtrix |
-| Timothy |  g3aishih |
-| g3aishih |  Timothy |
+| timothylai |  g3aishih |
+| g3aishih |  timothylai |
 | SunnyLi |  g3abby |
 | g3abby |  AlexDar |
 
@@ -31,7 +31,10 @@
 
 -----
 
-## Reviewer : Timothy
+## Reviewer : timothylai
+* Implementing the back button for the lost password page makes it much easier for navigation.
+* The lost password function works excellent without faults with the nodemailer package.
+* The interface and code is simple and corresponds well with our current interfaces.
 
 -----
 
