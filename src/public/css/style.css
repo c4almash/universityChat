@@ -69,15 +69,19 @@ ul {
   display: inline-block;
   overflow: auto;
   width: 85%;
+  padding-left: 0px;
   list-style-type: none; }
   ul li {
     width: 100%;
-    word-wrap: break-word;
     float: left; }
   ul li#user {
     color: #3498DB;
     font-weight: bold;
-    margin-bottom: 15px; }
+    margin-bottom: 15px;
+    text-overflow: ellipsis;
+    max-height: 26px;
+    white-space: nowrap;
+    overflow: hidden; }
 
 aside {
   position: fixed;
@@ -102,12 +106,3 @@ textarea {
   resize: none; }
 
 /*# sourceMappingURL=style.css.map */
-
-.control {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 15%;
-  background-color: black;
-}
