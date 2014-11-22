@@ -48,15 +48,15 @@ ul {
     li {
         width: 100%;
         float: left;
+        text-overflow: ellipsis;
+        max-height:26px;
+        white-space: nowrap;
+        overflow: hidden;
     }
     li#user {
         color: #3498DB;
         font-weight: bold;
         margin-bottom:15px;
-        text-overflow: ellipsis;
-        max-height:26px;
-        white-space: nowrap; 
-        overflow: hidden;
     }
 }
 
