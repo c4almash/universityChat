@@ -13,7 +13,8 @@
       position: relative; }
       #homepage #landing .login-form .form-group {
         margin-bottom: 20px;
-        position: relative; }
+        position: relative;
+        padding-right: 40px; }
         #homepage #landing .login-form .form-group .login-field:not(:focus) {
           border-color: transparent; }
         #homepage #landing .login-form .form-group .login-field-icon {
