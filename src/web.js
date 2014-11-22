@@ -16,6 +16,7 @@ var rooms = require("./rooms");
 // Library for managing users
 var users = require("./users");
 
+var seeds = require("./seeds");
 // CONFIGURATION
 // Logging
 app.use(logfmt.requestLogger());
@@ -108,13 +109,6 @@ app.post("/forgot-password", function(req, res) {
 });
 
 
-// User asked to create a room
-app.post("/", function(req, res) {
-  rooms.createRoom(req.ip, req.body.privacy, function(room) {
-    res.redirect(room);
-  });
-});
-
 function startsWith(base, str) {
   return base.substring( 0, str.length ) === str;
 }
@@ -122,6 +116,7 @@ function startsWith(base, str) {
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
+
   // This is the room name (pathname)
   var room = "global";
   var username = null;
@@ -166,4 +161,5 @@ io.on("connection", function(socket) {
       rooms.removeUser(room, username);
     }
   });
+  seeds.seed();
 });
