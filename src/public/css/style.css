@@ -68,7 +68,6 @@ html, body {
 ul {
   float: left;
   display: inline-block;
-  overflow: auto;
   width: 85%;
   padding-left: 0px;
   list-style-type: none; }
@@ -87,8 +86,11 @@ ul {
 aside {
   position: fixed;
   text-align: right;
+  overflow: hidden;
   right: 1em;
-  width: 10em; }
+  width: 10em;
+  top: 1em;
+  bottom: 5em; }
 
 textarea {
   position: fixed;
