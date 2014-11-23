@@ -123,7 +123,10 @@ function startsWith(base, str) {
 // User connected
 io.on("connection", function(socket) {
   // This is the room name (pathname)
-  var room = "global";
+  //var room = "global";
+  
+  var subscribedRooms = [];
+  var email = null;
   var username = null;
 
   var cookies = socket.handshake.headers.cookie.split("; ");
@@ -131,39 +134,74 @@ io.on("connection", function(socket) {
   for (var i = 0; i < cookies.length; i++) {
     if (startsWith(cookies[i], "token=")) {
       username = cookies[i].replace("token=", "").replace(/\%40(.*)/, "");
+      email = cookies[i].replace("token=", "").replace("%40", "@");
     }
   }
 
-  socket.join(room);
-  socket.broadcast.to(room).emit("join", username);
-  rooms.addUser(room, username);
+  //socket.join(room);
+  //socket.broadcast.to(room).emit("join", username);
+  //rooms.addUser(room, username);
 
   // Initializing client-side...
-  console.log("initializing user...");
-  rooms.getData(room, function(users, messages) {
-    var users = users;
-    var messageHistory = messages.map(JSON.parse);
-    socket.emit("initialize", {
-      username: username,
-      users: users,
-      messages: messageHistory
+  rooms.getRooms(function(allRooms) {
+    users.getSubscribedRooms(email, function(subscribedRooms) {
+      socket.emit("initialize", {
+        username: username,
+        rooms: allRooms,
+        subscribedRooms: subscribedRooms
+      });
     });
   });
 
-  // On receiving a message from the user
-  socket.on("message", function(msg) {
-    io.to(room).emit("message", msg);
-    console.log(msg.author + " said " + msg.text + " in room " + room);
-    rooms.addMessage(room, msg);
+  socket.on("roomsubscribe", function(room) {
+    users.subscribeToRoom(email, room, function(reply) {
+      users.getSubscribedRooms(email, function(subscribedRooms) {
+        socket.emit("updaterooms", subscribedRooms);
+      });
+    });
   });
+
+  socket.on("roomunsubscribe", function(room) {
+  });
+
+  socket.on("roomjoin", function(room) {
+    socket.join(room);
+    rooms.getData(room, function(users, messages) {
+      socket.emit("message", messages);
+    });
+
+    // emit join to update user list
+   //j io.to(room).emit("message", messages);
+  });
+
+  socket.on("roomquit", function(room) {
+    socket.leave(room);
+  });
+
+
+  //socket.on("getRoomInfo", function(room) {
+    //rooms.getData(room, function(users, messages) {
+      //socket.emit("roomInfo", room, users, messages);
+    //});
+  //});
+
+  // On receiving a message from the user
+  socket.on("message", function(msg, room) {
+    rooms.addMessage(room, msg, function() {
+      rooms.getData(room, function(users, messages) {
+        io.to(room).emit("message", messages);
+      });
+    });
+  });
+
 
   // On user disconnect
   socket.on("disconnect", function() {
     // Only consider it a disconnect if user has a username.
     // Otherwise pretend they never came
-    if (username) {
-      io.to(room).emit("quit", username);
-      rooms.removeUser(room, username);
-    }
+    //if (username) {
+      //io.to(room).emit("quit", username);
+      //rooms.removeUser(room, username);
+    //}
   });
 });

@@ -99,8 +99,64 @@ function userExists(email, callback) {
 
 /* END OF PHASE 3 FUNCTIONS */
 
+// uses JSON to store list of rooms.
+function subscribeToRoom(email, room, callback) {
+  var key = "user:" + email;
+  client.hget(key, "subscribedRooms", function(err, reply) {
+    var allRooms = JSON.parse(reply);
+    
+    if (allRooms) {
+      if (allRooms.indexOf(room) == -1) {
+        allRooms.push(room);
+      }
+    } else {
+      allRooms = [room];
+    }
+
+    var newRoomsString = JSON.stringify(allRooms);
+
+    client.hset(key, "subscribedRooms", newRoomsString);
+    callback(true);
+  });
+}
+
+function unsubscribeFromRoom(email, room) {
+  var key = "user:" + email;
+  client.hget(key, "subscribedRooms", function(err, reply) {
+    var allRooms = JSON.parse(reply);
+    var index = allRooms.indexOf(room);
+    if (index > -1) {
+      allRooms.splice(index, 1);
+    }
+
+    var newRoomsString = JSON.stringify(allRooms);
+
+    client.hset(key, "subscribedRooms", newRoomsString);
+  });
+}
+
+// gets subscribed rooms and its info.
+function getSubscribedRooms(email, callback) {
+  var key = "user:" + email;
+  client.hget(key, "subscribedRooms", function(err, reply) {
+    if (err) {
+      console.log("err: " + err);
+    } else {
+      var allRooms = JSON.parse(reply);
+      if (allRooms) {
+        callback(allRooms);
+      } else {
+        callback([]);
+      }
+    }
+  });
+}
+
 exports.registerUser = registerUser;
 exports.authenticate = authenticate;
 exports.isLoggedIn = isLoggedIn;
 exports.getPassword = getPassword;
 exports.userExists = userExists;
+exports.subscribeToRoom = subscribeToRoom;
+exports.unsubscribeFromRoom = unsubscribeFromRoom;
+exports.getSubscribedRooms = getSubscribedRooms;

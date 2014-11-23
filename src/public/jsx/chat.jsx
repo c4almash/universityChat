@@ -5,6 +5,9 @@ var Chat = React.createClass({
   getInitialState: function() {
     return {
       username: null,
+      rooms: [],
+      subscribedRooms: [],
+      currentRoom: null,
       users: [],
       messages: []
     };
@@ -13,23 +16,30 @@ var Chat = React.createClass({
     // initialization
     socket.on("initialize", this.initialize);
     // on receiving a message from the server
-    socket.on("message", this.getMessage);
+    // gets updated chat for that room
+    socket.on("message", this.getMessages);
     // on another user joining
     socket.on("join", this.userJoined);
     // on another user quitting
     socket.on("quit", this.userQuit);
+    // update subscribed rooms
+    socket.on("updaterooms", this.updateSubscribedRooms);
+    // getting info on a rooms
+    socket.on("roomInfo", this.roomInfo);
   },
   initialize: function(data) {
     this.setState({
       username: data.username,
-      users: data.users,
-      messages: data.messages
+      rooms: data.rooms,
+      subscribedRooms: data.subscribedRooms
     });
+
+    // need to get all rooms history
     scrollChatToBottom();
   },
-  getMessage: function(message) {
-    this.setState({messages: this.state.messages.concat([message])});
-    scrollChatToBottom();
+  getMessages: function(messages) {
+    this.setState({messages: messages});
+    //scrollChatToBottom(); // only if it's the one we're currently in
   },
   userJoined: function(user) {
     // add user that joined room to the user list
@@ -40,14 +50,63 @@ var Chat = React.createClass({
     newUsers.splice(newUsers.indexOf(user), 1);
     this.setState({users:newUsers});
   },
+  updateSubscribedRooms: function(subscribedRooms) {
+    this.setState({subscribedRooms: subscribedRooms});
+  },
+  changeCurrentRoom: function(room) {
+    // quit one room, join the new one
+    socket.emit("roomleave", this.state.currentRoom);
+    socket.emit("roomjoin", room);
+    this.setState({currentRoom: room});
+  },
   render: function() {
     return (
       <div id="chat">
+        <RoomList rooms={this.state.rooms} changeCurrentRoom={this.changeCurrentRoom} />
+        <SubscribedRooms subscribedRooms={this.state.subscribedRooms} changeCurrentRoom={this.changeCurrentRoom} />
         <UserList username={this.state.username} users={this.state.users} />
         <Conversation messages={this.state.messages} />
-        <MessageInput username={this.state.username} />
+        <MessageInput username={this.state.username} currentRoom={this.state.currentRoom} />
       </div>
     );
+  }
+});
+
+var RoomList = React.createClass({
+  subscribeRoom: function(e) {
+    var room = e.currentTarget.id;
+    socket.emit("roomsubscribe", room);
+    this.props.changeCurrentRoom(room);
+  },
+  render: function() {
+    var renderRoom = function(room) {
+      // should strip out "ip" first
+      return (<li id={room} onClick={this.subscribeRoom}>{room}</li>);
+    }.bind(this);
+    return (
+        <ul>
+          <li>All Rooms</li>
+          {this.props.rooms.map(renderRoom)}
+        </ul>
+    );
+  }
+});
+
+var SubscribedRooms = React.createClass({
+  changeRoom: function(e) {
+    var room = e.currentTarget.id;
+    this.props.changeCurrentRoom(room);
+  },
+  render: function() {
+    var renderRoom = function(room) {
+      // should strip out "ip" first
+      return (<li id={room} onClick={this.changeRoom}>{room}</li>);
+    }.bind(this);
+
+    return (<ul>
+              <li>Subscribed Rooms</li>
+              {this.props.subscribedRooms.map(renderRoom)}
+      </ul>)
   }
 });
 
@@ -71,7 +130,7 @@ var UserList = React.createClass({
   }
 });
 
-// conversation pane
+// Conversation pane
 var Conversation = React.createClass({
   render: function() {
     var renderMessage = function(message) {
@@ -99,7 +158,7 @@ var MessageInput = React.createClass({
     if (e.which == 13 && !e.shiftKey) {
       e.preventDefault();
       var message = { author: this.props.username, text: this.state.text };
-      socket.emit("message", message);
+      socket.emit("message", message, this.props.currentRoom);
       this.setState({text: ""});
     }
   },

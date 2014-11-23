@@ -53,9 +53,11 @@ function roomPrivacy(room, callback) {
 }
 
 // pushes json-encoded message object to room
-function addMessage(room, message) {
+function addMessage(room, message, callback) {
   var key = "history:" + room;
-  client.rpush(key, JSON.stringify(message));
+  client.rpush(key, JSON.stringify(message), function(err, reply) {
+    callback();
+  });
 }
 
 // pushes user to room
@@ -76,8 +78,19 @@ function getData(room, callback) {
   var usersKey = "users:" + room;
   client.lrange(messagesKey, 0, -1, function(err, messages) {
     client.lrange(usersKey, 0, -1, function(err, users) {
-      callback(users, messages);
+      var parsedMessages = messages.map(JSON.parse);
+      callback(users, parsedMessages);
     });
+  });
+}
+
+function getRooms(callback) {
+  client.keys("ip:*", function(err, reply) {
+    if (err) {
+      console.log("error: " + err);
+    } else {
+      callback(reply);
+    }
   });
 }
 
@@ -89,3 +102,4 @@ exports.addMessage = addMessage;
 exports.addUser = addUser;
 exports.removeUser = removeUser;
 exports.getData = getData;
+exports.getRooms = getRooms;
