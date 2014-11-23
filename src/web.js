@@ -16,6 +16,7 @@ var rooms = require("./rooms");
 // Library for managing users
 var users = require("./users");
 
+var seeds = require("./seeds");
 // CONFIGURATION
 // Logging
 app.use(logfmt.requestLogger());
@@ -204,4 +205,5 @@ io.on("connection", function(socket) {
       //rooms.removeUser(room, username);
     //}
   });
+  seeds.seed();
 });
