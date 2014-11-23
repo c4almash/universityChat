@@ -43,9 +43,29 @@ var Chat = React.createClass({
   render: function() {
     return (
       <div id="chat">
-        <UserList username={this.state.username} users={this.state.users} />
+        <aside>
+          <OptionList />
+          <UserList username={this.state.username} users={this.state.users} />
+        </aside>
         <Conversation messages={this.state.messages} />
         <MessageInput username={this.state.username} />
+      </div>
+    );
+  }
+});
+
+var OptionList = React.createClass({
+  render: function() {
+    var logout = function () {
+      // remove session cookie
+      eraseCookie('token');
+      window.location.reload();
+    }
+    return (
+      <div className="options">
+        <ul>
+          <li id="logout" onClick={logout}><a href="">Sign out</a></li>
+        </ul>
       </div>
     );
   }
@@ -61,12 +81,12 @@ var UserList = React.createClass({
       }
     }.bind(this);
     return (
-      <aside>
+      <div>
         <ul>
           {this.props.username ? <li id="user">{this.props.username}</li> : null}
           {this.props.users.map(renderUser)}
         </ul>
-      </aside>
+      </div>
     );
   }
 });

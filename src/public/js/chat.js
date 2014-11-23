@@ -43,9 +43,29 @@ var Chat = React.createClass({displayName: 'Chat',
   render: function() {
     return (
       React.createElement("div", {id: "chat"}, 
-        React.createElement(UserList, {username: this.state.username, users: this.state.users}), 
+        React.createElement("aside", null, 
+          React.createElement(OptionList, null), 
+          React.createElement(UserList, {username: this.state.username, users: this.state.users})
+        ), 
         React.createElement(Conversation, {messages: this.state.messages}), 
         React.createElement(MessageInput, {username: this.state.username})
+      )
+    );
+  }
+});
+
+var OptionList = React.createClass({displayName: 'OptionList',
+  render: function() {
+    var logout = function () {
+      // remove session cookie
+      eraseCookie('token');
+      window.location.reload();
+    }
+    return (
+      React.createElement("div", {className: "options"}, 
+        React.createElement("ul", null, 
+          React.createElement("li", {id: "logout", onClick: logout}, React.createElement("a", {href: ""}, "Sign out"))
+        )
       )
     );
   }
@@ -61,7 +81,7 @@ var UserList = React.createClass({displayName: 'UserList',
       }
     }.bind(this);
     return (
-      React.createElement("aside", null, 
+      React.createElement("div", null, 
         React.createElement("ul", null, 
           this.props.username ? React.createElement("li", {id: "user"}, this.props.username) : null, 
           this.props.users.map(renderUser)

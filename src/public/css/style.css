@@ -85,10 +85,14 @@ ul {
     margin-bottom: 15px; }
 
 aside {
-  position: fixed;
+  position: absolute;
   text-align: right;
   right: 1em;
   width: 10em; }
+  aside #logout > a {
+    color: #c0392b; }
+    aside #logout > a:hover {
+      color: #e74c3c; }
 
 textarea {
   position: fixed;
@@ -105,5 +109,3 @@ textarea {
   border-radius: 0.2em;
   outline: none;
   resize: none; }
-
-/*# sourceMappingURL=style.css.map */

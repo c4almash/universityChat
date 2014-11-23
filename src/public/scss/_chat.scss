@@ -34,7 +34,7 @@ html, body {
   z-index: 1;
 
   h4 {
-      margin-top: 0px;
+    margin-top: 0px;
   }
 }
 
@@ -61,11 +61,19 @@ ul {
 }
 
 aside {
-    position: fixed;
+    position: absolute;
     text-align: right;
     right: 1em;
     width: 10em;
+
+  #logout > a {
+    color: #c0392b;
+    &:hover {
+      color: #e74c3c;
+    }
+  }
 }
+
 textarea {
   position: fixed;
   width: 95%;
