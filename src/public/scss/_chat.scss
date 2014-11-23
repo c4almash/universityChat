@@ -43,11 +43,15 @@ ul {
     display: inline-block;
     overflow: auto;
     width: 85%;
+    padding-left:0px;
     list-style-type: none;
     li {
         width: 100%;
-        word-wrap: break-word;
         float: left;
+        text-overflow: ellipsis;
+        max-height:26px;
+        white-space: nowrap;
+        overflow: hidden;
     }
     li#user {
         color: #3498DB;
