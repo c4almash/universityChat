@@ -1,4 +1,4 @@
-// This module registers room names and ips.
+// This module registers room names
 var redis = require("redis"),
     client = redis.createClient();
 
@@ -43,6 +43,8 @@ function registerUser(email, password, callback) {
       return;
     }
     client.hset(key, "password", password, function(err, reply) {
+      // make user subscribe to the global chat room by default
+      subscribeToRoom(email, 'global');
       callback(null);
     });
   });
@@ -116,7 +118,8 @@ function subscribeToRoom(email, room, callback) {
     var newRoomsString = JSON.stringify(allRooms);
 
     client.hset(key, "subscribedRooms", newRoomsString);
-    callback(true);
+    if (callback)
+      callback(true);
   });
 }
 

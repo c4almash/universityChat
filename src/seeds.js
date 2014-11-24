@@ -11,13 +11,14 @@ client.on("error", function(err) {
 });
 
 function seed() {
-	rooms.addUser("dota2", "student1");
-	rooms.addUser("dota2", "student2");
-	rooms.addUser("dota2", "student3");
-	rooms.addUser("cs:go", "student1");
-	rooms.addUser("cs:go", "student4");
-	rooms.addMessage("dota2", { author: "student1", text: "MidOrFeed" });
-	rooms.addMessage("cs:go", { author: "student4", text: "rush b" });
+	rooms.createRoom("global", function(success) {
+      success? console.log('global room created.') : console.log('global room already exist.')
+    });
+	rooms.createRoom("csc301");
+//	rooms.addUser("global", "studentA");
+//	rooms.addUser("global", "studentB");
+//	rooms.addMessage("global", { author: "studentA", text: "foo" });
+//	rooms.addMessage("global", { author: "studentB", text: "bar" });
 };
 
 exports.seed = seed;

@@ -20,8 +20,6 @@ var seeds = require("./seeds");
 // CONFIGURATION
 // Logging
 app.use(logfmt.requestLogger());
-// For viewing ips
-app.enable("trust proxy");
 // For parsing body for post params
 app.use(bodyParser.urlencoded({ extended: false }));
 // For parsing cookies
@@ -108,14 +106,6 @@ app.post("/forgot-password", function(req, res) {
   });
 });
 
-
-// User asked to create a room
-app.post("/", function(req, res) {
-  rooms.createRoom(req.ip, req.body.privacy, function(room) {
-    res.redirect(room);
-  });
-});
-
 function startsWith(base, str) {
   return base.substring( 0, str.length ) === str;
 }
@@ -123,10 +113,7 @@ function startsWith(base, str) {
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
-  // This is the room name (pathname)
-  //var room = "global";
-  
-  var subscribedRooms = [];
+
   var email = null;
   var username = null;
 
@@ -205,5 +192,7 @@ io.on("connection", function(socket) {
       //rooms.removeUser(room, username);
     //}
   });
+
+  // this should only run once.. shouldn't be here.
   seeds.seed();
 });
