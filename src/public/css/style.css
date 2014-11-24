@@ -50,11 +50,11 @@ html, body {
 
 #chat {
   position: absolute;
-  width: 100%;
-  top: 1em;
+  top: 0em;
   left: 0em;
-  right: 0em;
+  right: -1em;
   bottom: 5em;
+  margin: 1em;
   overflow-y: scroll; }
 
 .modal {
@@ -84,15 +84,21 @@ ul {
     font-weight: bold;
     margin-bottom: 15px; }
 
-aside {
-  position: absolute;
-  text-align: right;
-  right: 1em;
-  width: 10em; }
-  aside #logout > a {
-    color: #c0392b; }
-    aside #logout > a:hover {
-      color: #e74c3c; }
+.sidebar #logout > a {
+  color: #c0392b; }
+  .sidebar #logout > a:hover {
+    color: #e74c3c; }
+.sidebar.pull-left {
+  width: 20%; }
+  .sidebar.pull-left a {
+    color: #95a5a6; }
+.sidebar.pull-right {
+  width: 15%;
+  text-align: right; }
+
+#conversation {
+  float: left;
+  width: 60%; }
 
 textarea {
   position: fixed;
@@ -109,3 +115,5 @@ textarea {
   border-radius: 0.2em;
   outline: none;
   resize: none; }
+
+/*# sourceMappingURL=style.css.map */

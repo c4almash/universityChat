@@ -18,11 +18,11 @@ html, body {
 
 #chat {
     position: absolute;
-    width: 100%;
-    top: 1em;
+    top: 0em;
     left: 0em;
-    right: 0em;
+    right: -1em;
     bottom: 5em;
+    margin: 1em;
     overflow-y: scroll;
 }
 
@@ -60,18 +60,30 @@ ul {
     }
 }
 
-aside {
-    position: absolute;
-    text-align: right;
-    right: 1em;
-    width: 10em;
-
+.sidebar {
   #logout > a {
     color: #c0392b;
     &:hover {
       color: #e74c3c;
     }
   }
+
+  &.pull-left {
+    width: 20%;
+
+    a {
+      color: #95a5a6;
+    }
+  }
+  &.pull-right {
+    width: 15%;
+    text-align: right;
+  }
+}
+
+#conversation {
+  float: left;
+  width: 60%;
 }
 
 textarea {

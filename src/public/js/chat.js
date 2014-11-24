@@ -62,13 +62,15 @@ var Chat = React.createClass({displayName: 'Chat',
   render: function() {
     return (
       React.createElement("div", {id: "chat"}, 
-        React.createElement("aside", null, 
+        React.createElement("aside", {className: "sidebar pull-left"}, 
+          React.createElement(SubscribedRooms, {subscribedRooms: this.state.subscribedRooms, changeCurrentRoom: this.changeCurrentRoom}), 
+          React.createElement(RoomList, {rooms: this.state.rooms, changeCurrentRoom: this.changeCurrentRoom})
+        ), 
+        React.createElement(Conversation, {messages: this.state.messages}), 
+        React.createElement("aside", {className: "sidebar pull-right"}, 
           React.createElement(OptionList, null), 
           React.createElement(UserList, {username: this.state.username, users: this.state.users})
         ), 
-        React.createElement(RoomList, {rooms: this.state.rooms, changeCurrentRoom: this.changeCurrentRoom}), 
-        React.createElement(SubscribedRooms, {subscribedRooms: this.state.subscribedRooms, changeCurrentRoom: this.changeCurrentRoom}), 
-        React.createElement(Conversation, {messages: this.state.messages}), 
         React.createElement(MessageInput, {username: this.state.username, currentRoom: this.state.currentRoom})
       )
     );
@@ -85,7 +87,7 @@ var OptionList = React.createClass({displayName: 'OptionList',
     return (
       React.createElement("div", {className: "options"}, 
         React.createElement("ul", null, 
-          React.createElement("li", {id: "logout", onClick: logout}, React.createElement("a", {href: ""}, "Sign out"))
+          React.createElement("li", {id: "logout", onClick: logout}, React.createElement("a", {href: "#"}, "Sign out"))
         )
       )
     );
@@ -101,7 +103,7 @@ var RoomList = React.createClass({displayName: 'RoomList',
   render: function() {
     var renderRoom = function(room) {
       // should strip out "ip" first
-      return (React.createElement("li", {id: room, onClick: this.subscribeRoom}, room));
+      return (React.createElement("li", {id: room, onClick: this.subscribeRoom}, React.createElement("a", {href: "#"}, room)));
     }.bind(this);
     return (
         React.createElement("ul", null, 
@@ -120,7 +122,7 @@ var SubscribedRooms = React.createClass({displayName: 'SubscribedRooms',
   render: function() {
     var renderRoom = function(room) {
       // should strip out "ip" first
-      return (React.createElement("li", {id: room, onClick: this.changeRoom}, room));
+      return (React.createElement("li", {id: room, onClick: this.changeRoom}, React.createElement("a", {href: "#"}, room)));
     }.bind(this);
 
     return (React.createElement("ul", null, 
