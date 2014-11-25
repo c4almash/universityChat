@@ -41,6 +41,7 @@ html, body {
 ul {
     float: left;
     display: inline-block;
+    overflow: auto;
     width: 85%;
     padding-left:0px;
     list-style-type: none;
@@ -60,13 +61,10 @@ ul {
 }
 
 aside {
-    position:fixed;
+    position: absolute;
     text-align: right;
-    overflow:hidden;
     right: 1em;
     width: 10em;
-    top: 1em;
-    bottom: 5em;
 
   #logout > a {
     color: #c0392b;
@@ -91,10 +89,6 @@ textarea {
   border-radius: 0.2em;
   outline: none;
   resize: none;
-}
-
-textarea#message-input{
-    max-height:2.5em;
 }
 
 
