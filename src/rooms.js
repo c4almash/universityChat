@@ -46,24 +46,24 @@ function createRoom(name, callback) {
 function addMessage(room_name, message, callback) {
   var key = "history:" + room_name;
   client.rpush(key, JSON.stringify(message), function(err, reply) {
-    console.log("message: ", message, "saved to room:", room_name);
-    if (callback) {
-      callback();
-      console.log("callback executed.");
-    }
+    callback();
   });
 }
 
 // pushes user to room
-function addUser(room, user) {
+function addUser(room, user, callback) {
   var key = "users:" + room;
-  client.rpush(key, user);
+  client.rpush(key, user, function(err, reply) {
+    callback();
+  });
 }
 
 // removes user from room
-function removeUser(room, user) {
+function removeUser(room, user, callback) {
   var key = "users:" + room;
-  client.lrem(key, 0, user);
+  client.lrem(key, 0, user, function(err, reply) {
+    callback();
+  });
 }
 
 // gets current users, message history of room

@@ -18,6 +18,8 @@ var Chat = React.createClass({
     // on receiving a message from the server
     // gets updated chat for that room
     socket.on("message", this.getMessages);
+    // on userlist change
+    socket.on("user", this.getUsers);
     // on another user joining
     socket.on("join", this.userJoined);
     // on another user quitting
@@ -36,21 +38,14 @@ var Chat = React.createClass({
 
     socket.emit("roomjoin", this.state.currentRoom);
 
-    // need to get all rooms history
     scrollChatToBottom();
   },
   getMessages: function(messages) {
     this.setState({messages: messages});
-    //scrollChatToBottom(); // only if it's the one we're currently in
+    scrollChatToBottom(); // only if it's the one we're currently in
   },
-  userJoined: function(user) {
-    // add user that joined room to the user list
-    this.setState({users: this.state.users.concat([user])});
-  },
-  userQuit: function(user) {
-    var newUsers = this.state.users;
-    newUsers.splice(newUsers.indexOf(user), 1);
-    this.setState({users:newUsers});
+  getUsers: function(users) {
+    this.setState({users: users});
   },
   updateSubscribedRooms: function(subscribedRooms) {
     this.setState({subscribedRooms: subscribedRooms});
@@ -93,7 +88,7 @@ var OptionList = React.createClass({
     return (
       <div className="options">
         <ul>
-          <li id="logout" onClick={logout}><a href="#">Sign out</a></li>
+          <li id="logout" onClick={logout}><a href="#">Sign out</a></li>;
         </ul>
       </div>
     );
@@ -168,7 +163,11 @@ var UserList = React.createClass({
 var Conversation = React.createClass({
   render: function() {
     var renderMessage = function(message) {
-      return <Message author={message.author} text={message.text} />
+      if (message["type"] == "message") {
+        return <Message author={message.author} text={message.text} />
+      } else {
+        return <UserEvent event={message} />
+      }
     };
     return (<ul id="conversation">{this.props.messages.map(renderMessage)}</ul>);
   }
@@ -177,7 +176,20 @@ var Conversation = React.createClass({
 var Message = React.createClass({
   render: function() {
     var message = this.props.author + ": " + this.props.text;
-    return (<li>{message}</li>);
+    return (<li className="message">{message}</li>);
+  }
+});
+
+var UserEvent = React.createClass({
+  render: function() {
+    var message = "";
+    if (this.props.event.event == "join") {
+      message = this.props.event.user + " has joined the room.";
+    } else {
+      message = this.props.event.user + " has left the room.";
+    }
+
+    return (<li className="event">{message}</li>);
   }
 });
 

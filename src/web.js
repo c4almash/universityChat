@@ -120,8 +120,8 @@ io.on("connection", function(socket) {
 
   var email = null;
   var username = null;
-
   var cookies = socket.handshake.headers.cookie.split("; ");
+  var currentRoom = "global";
 
   for (var i = 0; i < cookies.length; i++) {
     if (startsWith(cookies[i], "token=")) {
@@ -129,10 +129,6 @@ io.on("connection", function(socket) {
       email = cookies[i].replace("token=", "").replace("%40", "@");
     }
   }
-
-  //socket.join(room);
-  //socket.broadcast.to(room).emit("join", username);
-  //rooms.addUser(room, username);
 
   // Initializing client-side...
   rooms.getRooms(function(allRooms) {
@@ -157,28 +153,41 @@ io.on("connection", function(socket) {
   });
 
   socket.on("roomjoin", function(room) {
-    socket.join(room);
-    rooms.getData(room, function(users, messages) {
-      socket.emit("message", messages);
+    currentRoom = room;
+    socket.join(room, function() {
+      rooms.addUser(room, username, function() {
+        var msg = {type: 'user', user: username, event: 'join'};
+        rooms.addMessage(room, msg, function() {
+          rooms.getData(room, function(users, messages) {
+            socket.emit("user", users);
+            socket.emit("message", messages);
+            socket.to(room).emit("user", users);
+            socket.to(room).emit("message", messages);
+          });
+        });
+      });
     });
-
-    // emit join to update user list
-   //j io.to(room).emit("message", messages);
   });
 
-  socket.on("roomquit", function(room) {
-    socket.leave(room);
+  socket.on("roomleave", function(room) {
+    socket.leave(room, function() {
+      rooms.removeUser(room, username, function() {
+        var msg = {type: 'userevent', user: username, event: 'leave'};
+        rooms.addMessage(room, msg, function() {
+          rooms.getData(room, function(users, messages) {
+            socket.emit("user", users);
+            socket.emit("message", messages);
+            socket.to(room).emit("user", users);
+            socket.to(room).emit("message", messages);
+          });
+        });
+      });
+    });
   });
-
-
-  //socket.on("getRoomInfo", function(room) {
-    //rooms.getData(room, function(users, messages) {
-      //socket.emit("roomInfo", room, users, messages);
-    //});
-  //});
 
   // On receiving a message from the user
   socket.on("message", function(msg, room) {
+    msg['type'] = "message";
     rooms.addMessage(room, msg, function() {
       rooms.getData(room, function(users, messages) {
         io.to(room).emit("message", messages);
@@ -189,12 +198,16 @@ io.on("connection", function(socket) {
 
   // On user disconnect
   socket.on("disconnect", function() {
-    // Only consider it a disconnect if user has a username.
-    // Otherwise pretend they never came
-    //if (username) {
-      //io.to(room).emit("quit", username);
-      //rooms.removeUser(room, username);
-    //}
+    var room = currentRoom;
+    rooms.removeUser(room, username, function() {
+      var msg = {type: 'userevent', user: username, event: 'leave'};
+      rooms.addMessage(room, msg, function() {
+        rooms.getData(room, function(users, messages) {
+          socket.to(room).emit("user", users);
+          socket.to(room).emit("message", messages);
+        });
+      });
+    });
   });
 
 });

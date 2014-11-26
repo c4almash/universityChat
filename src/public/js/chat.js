@@ -18,6 +18,8 @@ var Chat = React.createClass({displayName: 'Chat',
     // on receiving a message from the server
     // gets updated chat for that room
     socket.on("message", this.getMessages);
+    // on userlist change
+    socket.on("user", this.getUsers);
     // on another user joining
     socket.on("join", this.userJoined);
     // on another user quitting
@@ -40,17 +42,12 @@ var Chat = React.createClass({displayName: 'Chat',
     scrollChatToBottom();
   },
   getMessages: function(messages) {
+    console.log("got messages..");
     this.setState({messages: messages});
     //scrollChatToBottom(); // only if it's the one we're currently in
   },
-  userJoined: function(user) {
-    // add user that joined room to the user list
-    this.setState({users: this.state.users.concat([user])});
-  },
-  userQuit: function(user) {
-    var newUsers = this.state.users;
-    newUsers.splice(newUsers.indexOf(user), 1);
-    this.setState({users:newUsers});
+  getUsers: function(users) {
+    this.setState({users: users});
   },
   updateSubscribedRooms: function(subscribedRooms) {
     this.setState({subscribedRooms: subscribedRooms});
@@ -168,7 +165,11 @@ var UserList = React.createClass({displayName: 'UserList',
 var Conversation = React.createClass({displayName: 'Conversation',
   render: function() {
     var renderMessage = function(message) {
-      return React.createElement(Message, {author: message.author, text: message.text})
+      if (message["type"] == "message") {
+        return React.createElement(Message, {author: message.author, text: message.text})
+      } else {
+        return React.createElement(UserEvent, {event: message})
+      }
     };
     return (React.createElement("ul", {id: "conversation"}, this.props.messages.map(renderMessage)));
   }
@@ -177,7 +178,20 @@ var Conversation = React.createClass({displayName: 'Conversation',
 var Message = React.createClass({displayName: 'Message',
   render: function() {
     var message = this.props.author + ": " + this.props.text;
-    return (React.createElement("li", null, message));
+    return (React.createElement("li", {className: "message"}, message));
+  }
+});
+
+var UserEvent = React.createClass({displayName: 'UserEvent',
+  render: function() {
+    var message = "";
+    if (this.props.event.event == "join") {
+      message = this.props.event.user + " has joined the room.";
+    } else {
+      message = this.props.event.user + " has left the room.";
+    }
+
+    return (React.createElement("li", {className: "event"}, message));
   }
 });
 
