@@ -62,13 +62,15 @@ var Chat = React.createClass({
   render: function() {
     return (
       <div id="chat">
-        <aside>
+        <aside className="sidebar pull-left">
+          <SubscribedRooms subscribedRooms={this.state.subscribedRooms} changeCurrentRoom={this.changeCurrentRoom} />
+          <RoomList rooms={this.state.rooms} changeCurrentRoom={this.changeCurrentRoom} />
+        </aside>
+        <Conversation messages={this.state.messages} />
+        <aside className="sidebar pull-right">
           <OptionList />
           <UserList username={this.state.username} users={this.state.users} />
         </aside>
-        <RoomList rooms={this.state.rooms} changeCurrentRoom={this.changeCurrentRoom} />
-        <SubscribedRooms subscribedRooms={this.state.subscribedRooms} changeCurrentRoom={this.changeCurrentRoom} />
-        <Conversation messages={this.state.messages} />
         <MessageInput username={this.state.username} currentRoom={this.state.currentRoom} />
       </div>
     );
@@ -85,7 +87,7 @@ var OptionList = React.createClass({
     return (
       <div className="options">
         <ul>
-          <li id="logout" onClick={logout}><a href="">Sign out</a></li>
+          <li id="logout" onClick={logout}><a href="#">Sign out</a></li>
         </ul>
       </div>
     );
@@ -101,7 +103,7 @@ var RoomList = React.createClass({
   render: function() {
     var renderRoom = function(room) {
       // should strip out "ip" first
-      return (<li id={room} onClick={this.subscribeRoom}>{room}</li>);
+      return (<li id={room} onClick={this.subscribeRoom}><a href="#">{room}</a></li>);
     }.bind(this);
     return (
         <ul>
@@ -120,7 +122,7 @@ var SubscribedRooms = React.createClass({
   render: function() {
     var renderRoom = function(room) {
       // should strip out "ip" first
-      return (<li id={room} onClick={this.changeRoom}>{room}</li>);
+      return (<li id={room} onClick={this.changeRoom}><a href="#">{room}</a></li>);
     }.bind(this);
 
     return (<ul>
