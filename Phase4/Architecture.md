@@ -1,8 +1,11 @@
 Architecture
-Our app runs on the web, powered almost totally by Javascript. We use node.js
-and the Express framework on the backend, which handles the webserver and
-delivers the public assets. The instant messaging is handled using the socket.io
-library. There is also a redis database instance that stores all the information
+---------------
+
+Our chat app is a web-based application with frontend and backend programmed
+almost entirely in Javascript. We use node.js and the Express framework for
+the backend, which deliver assets and keep our frontend chat application
+messages in sync. The instant messaging is handled using the socket.io library.
+There is also a redis database instance that stores all the information
 associated with the chat rooms and the users. We have created two DAOs: one that
 interfaces as a library to perform actions on chat rooms and one for users. That
 way, our main webserver need not be concerned with talking to redis at all, and
