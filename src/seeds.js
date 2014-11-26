@@ -11,6 +11,8 @@ client.on("error", function(err) {
 });
 
 function seed() {
+	rooms.createRoom("dota2");
+	rooms.createRoom("cs:go");
 	rooms.addUser("dota2", "student1");
 	rooms.addUser("dota2", "student2");
 	rooms.addUser("dota2", "student3");

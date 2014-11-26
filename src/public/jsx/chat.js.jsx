@@ -1,5 +1,8 @@
 /** @jsx React.DOM */
-
+function show() {
+  var elem = document.getElementById("modal");
+  elem.style.visibility = visible;
+}
 // main component
 var Chat = React.createClass({
   getInitialState: function() {
@@ -42,12 +45,29 @@ var Chat = React.createClass({
   },
   render: function() {
     return (
-      <div id="chat">
-        <UserList username={this.state.username} users={this.state.users} />
-        <Conversation messages={this.state.messages} />
-        <MessageInput username={this.state.username} />
+      <div>
+        <div id="chat">
+          <UserList username={this.state.username} users={this.state.users} />
+          <Conversation messages={this.state.messages} />
+          <MessageInput username={this.state.username} />
+          <div id="modal"></div>
+        </div>
+        <div id="controlBox">
+          <ChangePassword modalOn={this.state.modalOn}/>
+        </div>
       </div>
     );
+  }
+});
+
+var ChangePassword = React.createClass({
+  render: function() {
+    if (this.props.modalOn) {
+
+      return (<button onclick="show()">Change password</button>);
+    } else {
+      return null;
+    }
   }
 });
 
@@ -107,8 +127,7 @@ var MessageInput = React.createClass({
     return (
       <textarea id="message-input" className="animated"
                 placeholder="Write message..." value={this.state.text}
-                onChange={this.messageUpdated} onKeyDown={this.handleEnter}
-      />
+                onChange={this.messageUpdated} onKeyDown={this.handleEnter}/>
     );
   }
 });

@@ -1,5 +1,4 @@
 /** @jsx React.DOM */
-
 // main component
 var Chat = React.createClass({displayName: 'Chat',
   getInitialState: function() {
@@ -42,11 +41,25 @@ var Chat = React.createClass({displayName: 'Chat',
   },
   render: function() {
     return (
-      React.createElement("div", {id: "chat"}, 
-        React.createElement(UserList, {username: this.state.username, users: this.state.users}), 
-        React.createElement(Conversation, {messages: this.state.messages}), 
-        React.createElement(MessageInput, {username: this.state.username})
+      React.createElement("div", null, 
+        React.createElement("div", {id: "chat"}, 
+          React.createElement(UserList, {username: this.state.username, users: this.state.users}), 
+          React.createElement(Conversation, {messages: this.state.messages}), 
+          React.createElement(MessageInput, {username: this.state.username}), 
+          React.createElement("div", {id: "modal"})
+        ), 
+        React.createElement("div", {id: "controlBox"}, 
+          React.createElement(ChangePassword, null)
+        )
       )
+    );
+  }
+});
+
+var ChangePassword = React.createClass({displayName: 'ChangePassword',
+  render: function() {
+    return (
+      React.createElement("button", {onclick: "show()"}, "Change password")
     );
   }
 });
@@ -107,8 +120,7 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
     return (
       React.createElement("textarea", {id: "message-input", className: "animated", 
                 placeholder: "Write message...", value: this.state.text, 
-                onChange: this.messageUpdated, onKeyDown: this.handleEnter}
-      )
+                onChange: this.messageUpdated, onKeyDown: this.handleEnter})
     );
   }
 });
@@ -117,6 +129,12 @@ function scrollChatToBottom() {
   var objDiv = document.getElementById("chat");
   objDiv.scrollTop = objDiv.scrollHeight;
 }
+
+function show() {
+  var elem = document.getElementById("modal");
+  elem.style.visibility = "visible";
+}
+
 
 var socket = io.connect(window.location.hostname);
 React.renderComponent(React.createElement(Chat, null), document.body);

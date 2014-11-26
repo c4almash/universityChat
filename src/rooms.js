@@ -12,8 +12,8 @@ client.on("error", function(err) {
 
 // check if room with ip ipAddress exists
 // returns bool
-function doesRoomExist(ipAddress, callback) {
-  var key = "ip:" + ipAddress;
+function doesRoomExist(room, callback) {
+  var key = "room:" + room;
   client.exists(key, function(err, reply) {
     if (reply) {
       callback(true);
@@ -23,33 +23,17 @@ function doesRoomExist(ipAddress, callback) {
   });
 }
 
-// gets the room for ip ipAddress
-function getRoom(ipAddress, callback) {
-  var key = "ip:" + ipAddress;
+
+function getRoom(room, callback) {
+  var key = "room:" + room;
   client.get(key, function(err, reply) {
     callback(reply);
   });
 }
 
-function createRoom(ipAddress, privacy, callback) {
-  // does the key exist? if not then make new room
-  // otherwise get the existing room
-  var key = "ip:" + ipAddress;
-  // get a random room from available rooms, pop it and add to
-  // rooms:taken and register the ip to that room
-  client.spop("rooms:available", function(err, newRoom) {
-    client.sadd("rooms:taken", newRoom);
-    client.set("privacy:" + newRoom, privacy);
-    client.set(key, newRoom);
-    callback(newRoom); });
-}
-
-// checks whether room is private
-function roomPrivacy(room, callback) {
-  var key = "privacy:" + room;
-  client.get(key, function(err, reply) {
-    callback(reply);
-  });
+function createRoom(room) {
+  var key = "room:" + room
+  client.rpush(room, "");
 }
 
 // pushes json-encoded message object to room
@@ -84,7 +68,6 @@ function getData(room, callback) {
 exports.doesRoomExist = doesRoomExist;
 exports.getRoom = getRoom;
 exports.createRoom = createRoom;
-exports.roomPrivacy = roomPrivacy;
 exports.addMessage = addMessage;
 exports.addUser = addUser;
 exports.removeUser = removeUser;
