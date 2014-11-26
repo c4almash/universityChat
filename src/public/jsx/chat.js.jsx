@@ -1,7 +1,10 @@
 /** @jsx React.DOM */
-
+function show() {
+  var elem = document.getElementById("modal");
+  elem.style.visibility = visible;
+}
 // main component
-var Chat = React.createClass({displayName: 'Chat',
+var Chat = React.createClass({
   getInitialState: function() {
     return {
       username: null,
@@ -42,53 +45,70 @@ var Chat = React.createClass({displayName: 'Chat',
   },
   render: function() {
     return (
-      React.createElement("div", {id: "chat"}, 
-        React.createElement(UserList, {username: this.state.username, users: this.state.users}), 
-        React.createElement(Conversation, {messages: this.state.messages}), 
-        React.createElement(MessageInput, {username: this.state.username})
-      )
+      <div>
+        <div id="chat">
+          <UserList username={this.state.username} users={this.state.users} />
+          <Conversation messages={this.state.messages} />
+          <MessageInput username={this.state.username} />
+          <div id="modal"></div>
+        </div>
+        <div id="controlBox">
+          <ChangePassword modalOn={this.state.modalOn}/>
+        </div>
+      </div>
     );
   }
 });
 
-var UserList = React.createClass({displayName: 'UserList',
+var ChangePassword = React.createClass({
+  render: function() {
+    if (this.props.modalOn) {
+
+      return (<button onclick="show()">Change password</button>);
+    } else {
+      return null;
+    }
+  }
+});
+
+var UserList = React.createClass({
   render: function() {
     var renderUser = function(user) {
       if (user == this.props.username) {
         return null;
       } else {
-        return (React.createElement("li", null, user));
+        return (<li>{user}</li>);
       }
     }.bind(this);
     return (
-      React.createElement("aside", null, 
-        React.createElement("ul", null, 
-          this.props.username ? React.createElement("li", {id: "user"}, this.props.username) : null, 
-          this.props.users.map(renderUser)
-        )
-      )
+      <aside>
+        <ul>
+          {this.props.username ? <li id="user">{this.props.username}</li> : null}
+          {this.props.users.map(renderUser)}
+        </ul>
+      </aside>
     );
   }
 });
 
 // conversation pane
-var Conversation = React.createClass({displayName: 'Conversation',
+var Conversation = React.createClass({
   render: function() {
     var renderMessage = function(message) {
-      return React.createElement(Message, {author: message.author, text: message.text})
+      return <Message author={message.author} text={message.text} />
     };
-    return (React.createElement("ul", {id: "conversation"}, this.props.messages.map(renderMessage)));
+    return (<ul id="conversation">{this.props.messages.map(renderMessage)}</ul>);
   }
 });
 
-var Message = React.createClass({displayName: 'Message',
+var Message = React.createClass({
   render: function() {
     var message = this.props.author + ": " + this.props.text;
-    return (React.createElement("li", null, message));
+    return (<li>{message}</li>);
   }
 });
 
-var MessageInput = React.createClass({displayName: 'MessageInput',
+var MessageInput = React.createClass({
   getInitialState: function() {
     return {text: ""};
   },
@@ -105,10 +125,9 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
   },
   render: function() {
     return (
-      React.createElement("textarea", {id: "message-input", className: "animated", 
-                placeholder: "Write message...", value: this.state.text, 
-                onChange: this.messageUpdated, onKeyDown: this.handleEnter}
-      )
+      <textarea id="message-input" className="animated"
+                placeholder="Write message..." value={this.state.text}
+                onChange={this.messageUpdated} onKeyDown={this.handleEnter}/>
     );
   }
 });
@@ -119,4 +138,4 @@ function scrollChatToBottom() {
 }
 
 var socket = io.connect(window.location.hostname);
-React.renderComponent(React.createElement(Chat, null), document.body);
+React.renderComponent(<Chat />, document.body);

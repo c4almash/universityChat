@@ -1,12 +1,10 @@
 /** @jsx React.DOM */
-
 // main component
 var Chat = React.createClass({displayName: 'Chat',
   getInitialState: function() {
     return {
       username: null,
       users: [],
-      ip: null,
       messages: []
     };
   },
@@ -33,18 +31,13 @@ var Chat = React.createClass({displayName: 'Chat',
     scrollChatToBottom();
   },
   userJoined: function(user) {
-    // since server emits a join when this user joins,
-    // we have to ignore for that case
-    if (this.state.username != user) {
-      this.setState({users: this.state.users.concat([user])});
-    }
-    scrollChatToBottom();
+    // add user that joined room to the user list
+    this.setState({users: this.state.users.concat([user])});
   },
   userQuit: function(user) {
-    var newUsers = this.state.users.slice();
-    newUsers.splice(newUsers.indexOf(user));
+    var newUsers = this.state.users;
+    newUsers.splice(newUsers.indexOf(user), 1);
     this.setState({users:newUsers});
-    scrollChatToBottom();
   },
   render: function() {
     return (
@@ -52,9 +45,21 @@ var Chat = React.createClass({displayName: 'Chat',
         React.createElement("div", {id: "chat"}, 
           React.createElement(UserList, {username: this.state.username, users: this.state.users}), 
           React.createElement(Conversation, {messages: this.state.messages}), 
-          React.createElement(MessageInput, {username: this.state.username})
+          React.createElement(MessageInput, {username: this.state.username}), 
+          React.createElement("div", {id: "modal"})
+        ), 
+        React.createElement("div", {id: "controlBox"}, 
+          React.createElement(ChangePassword, null)
         )
       )
+    );
+  }
+});
+
+var ChangePassword = React.createClass({displayName: 'ChangePassword',
+  render: function() {
+    return (
+      React.createElement("button", {onclick: "show()"}, "Change password")
     );
   }
 });
@@ -68,12 +73,14 @@ var UserList = React.createClass({displayName: 'UserList',
         return (React.createElement("li", null, user));
       }
     }.bind(this);
-    return (React.createElement("aside", null, 
-      React.createElement("ul", null, 
-        this.props.username ? React.createElement("li", {id: "user"}, this.props.username) : null, 
-        this.props.users.map(renderUser)
+    return (
+      React.createElement("aside", null, 
+        React.createElement("ul", null, 
+          this.props.username ? React.createElement("li", {id: "user"}, this.props.username) : null, 
+          this.props.users.map(renderUser)
+        )
       )
-    ));
+    );
   }
 });
 
@@ -110,12 +117,10 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
     }
   },
   render: function() {
-        return (
-        React.createElement("textarea", {id: "message-input", 
-                  placeholder: "Write message...", value: this.state.text, 
-                  onChange: this.messageUpdated, onKeyDown: this.handleEnter, 
-                  className: "animated"}
-        )
+    return (
+      React.createElement("textarea", {id: "message-input", className: "animated", 
+                placeholder: "Write message...", value: this.state.text, 
+                onChange: this.messageUpdated, onKeyDown: this.handleEnter})
     );
   }
 });
@@ -124,6 +129,12 @@ function scrollChatToBottom() {
   var objDiv = document.getElementById("chat");
   objDiv.scrollTop = objDiv.scrollHeight;
 }
+
+function show() {
+  var elem = document.getElementById("modal");
+  elem.style.visibility = "visible";
+}
+
 
 var socket = io.connect(window.location.hostname);
 React.renderComponent(React.createElement(Chat, null), document.body);

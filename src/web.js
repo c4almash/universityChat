@@ -5,6 +5,7 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var io = require("socket.io");
+var nodeMailer = require("nodemailer");
 // Start up express server
 var app = express();
 var server = app.listen(8080);
@@ -15,6 +16,7 @@ var rooms = require("./rooms");
 // Library for managing users
 var users = require("./users");
 
+var seeds = require("./seeds");
 // CONFIGURATION
 // Logging
 app.use(logfmt.requestLogger());
@@ -71,13 +73,41 @@ app.post("/login", function(req, res) {
   });
 });
 
+// Forgot password
+app.get("/forgotpassword", function(req, res) {
+  res.sendFile("public/html/forgotpassword.html", {"root": __dirname});
+});
 
-// User asked to create a room
-app.post("/", function(req, res) {
-  rooms.createRoom(req.ip, req.body.privacy, function(room) {
-    res.redirect(room);
+app.post("/forgot-password", function(req, res) {
+  var email = req.body.email;
+  users.userExists(email, function(err) {
+    if (err) {
+      // email not found
+      res.cookie("alert", err);
+      res.redirect("/forgotpassword");
+    } else {
+      var transporter = nodeMailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'csc301ututor@gmail.com',
+          pass: 'team1ututor'
+        }
+      });
+      
+      users.getPassword(email, function(cookie) {
+        transporter.sendMail({
+          from: 'csc301ututor@gmail.com',
+          to: email,
+          subject: 'Password recovery',
+          text: "Your password is: " + cookie
+        });
+      });
+      res.cookie("alert", "Password sent to " + email);
+      res.redirect("/");
+    }
   });
 });
+
 
 function startsWith(base, str) {
   return base.substring( 0, str.length ) === str;
@@ -86,6 +116,7 @@ function startsWith(base, str) {
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
+
   // This is the room name (pathname)
   var room = "global";
   var username = null;
@@ -99,7 +130,7 @@ io.on("connection", function(socket) {
   }
 
   socket.join(room);
-  io.to(room).emit("join", username);
+  socket.broadcast.to(room).emit("join", username);
   rooms.addUser(room, username);
 
   // Initializing client-side...
@@ -130,4 +161,5 @@ io.on("connection", function(socket) {
       rooms.removeUser(room, username);
     }
   });
+  seeds.seed();
 });
