@@ -65,9 +65,7 @@ app.post("/login", function(req, res) {
           // user already exist => wrong sign-in info
           res.cookie("alert", err);
         } else {
-          // registeriation success, prompt sign-in
-          res.cookie("alert", "Congratz, you are now one of us. " +
-            "Sign-in again with the same credential you've just used.");
+          res.cookie("token", cookie);
         }
         res.redirect("/");
       });
