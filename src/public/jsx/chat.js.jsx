@@ -1,8 +1,4 @@
 /** @jsx React.DOM */
-function show() {
-  var elem = document.getElementById("modal");
-  elem.style.visibility = visible;
-}
 // main component
 var Chat = React.createClass({
   getInitialState: function() {
@@ -50,24 +46,48 @@ var Chat = React.createClass({
           <UserList username={this.state.username} users={this.state.users} />
           <Conversation messages={this.state.messages} />
           <MessageInput username={this.state.username} />
-          <div id="modal"></div>
-        </div>
+          <Modal /> </div>
         <div id="controlBox">
-          <ChangePassword modalOn={this.state.modalOn}/>
+          <ChangePassword />
         </div>
       </div>
     );
   }
 });
 
-var ChangePassword = React.createClass({
+var Modal = React.createClass({
+  getInitialState: function() {
+    return {
+      currentPassword: "",
+      newPassword: ""};
+  },
+  handleChange: function(event) {
+    this.setState({currentPassword: event.target.value});
+    this.setState({newPassword: event.target.value});
+  },
   render: function() {
-    if (this.props.modalOn) {
+    var currentPassword = this.state.value;
+    var newPassword = this.state.value;
+    return (<div id="modal">
+      <form class="change-password-form" action="change-password" method="POST">
+      <div class="form-group">
+      <input type="text" id="current-password" placeholder="Enter your current password" name="currentPassword" value={currentPassword} onChange={this.handleChange} class="form-control login-field"/>
+      <p></p>
+      <input type="text" id="new-password" placeholder="Enter your new password" name="newPassword" value={newPassword} onChange={this.handleChange} class="form-control login-field"/>
+      </div>
+      <input type="submit" class="btn btn-primary btn-lg btn-block" value="Change password"/>
+      </form>
+      </div>)
+  }
+});
 
-      return (<button onclick="show()">Change password</button>);
-    } else {
-      return null;
-    }
+var ChangePassword = React.createClass({
+  handleClick: function(e) {
+    var elem = document.getElementById("modal");
+    elem.style.visibility = "visible";
+  },
+  render: function() {
+    return (<button onClick={this.handleClick}>Change password</button>);
   }
 });
 

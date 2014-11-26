@@ -46,8 +46,7 @@ var Chat = React.createClass({displayName: 'Chat',
           React.createElement(UserList, {username: this.state.username, users: this.state.users}), 
           React.createElement(Conversation, {messages: this.state.messages}), 
           React.createElement(MessageInput, {username: this.state.username}), 
-          React.createElement("div", {id: "modal"})
-        ), 
+          React.createElement(Modal, null), " "), 
         React.createElement("div", {id: "controlBox"}, 
           React.createElement(ChangePassword, null)
         )
@@ -56,11 +55,39 @@ var Chat = React.createClass({displayName: 'Chat',
   }
 });
 
-var ChangePassword = React.createClass({displayName: 'ChangePassword',
+var Modal = React.createClass({displayName: 'Modal',
+  getInitialState: function() {
+    return {
+      currentPassword: "",
+      newPassword: ""};
+  },
+  handleChange: function(event) {
+    this.setState({currentPassword: event.target.value});
+    this.setState({newPassword: event.target.value});
+  },
   render: function() {
-    return (
-      React.createElement("button", {onclick: "show()"}, "Change password")
-    );
+    var currentPassword = this.state.value;
+    var newPassword = this.state.value;
+    return (React.createElement("div", {id: "modal"}, 
+      React.createElement("form", {class: "change-password-form", action: "change-password", method: "POST"}, 
+      React.createElement("div", {class: "form-group"}, 
+      React.createElement("input", {type: "text", id: "current-password", placeholder: "Enter your current password", name: "currentPassword", value: currentPassword, onChange: this.handleChange, class: "form-control login-field"}), 
+      React.createElement("p", null), 
+      React.createElement("input", {type: "text", id: "new-password", placeholder: "Enter your new password", name: "newPassword", value: newPassword, onChange: this.handleChange, class: "form-control login-field"})
+      ), 
+      React.createElement("input", {type: "submit", class: "btn btn-primary btn-lg btn-block", value: "Change password"})
+      )
+      ))
+  }
+});
+
+var ChangePassword = React.createClass({displayName: 'ChangePassword',
+  handleClick: function(e) {
+    var elem = document.getElementById("modal");
+    elem.style.visibility = "visible";
+  },
+  render: function() {
+    return (React.createElement("button", {onClick: this.handleClick}, "Change password"));
   }
 });
 
@@ -129,12 +156,6 @@ function scrollChatToBottom() {
   var objDiv = document.getElementById("chat");
   objDiv.scrollTop = objDiv.scrollHeight;
 }
-
-function show() {
-  var elem = document.getElementById("modal");
-  elem.style.visibility = "visible";
-}
-
 
 var socket = io.connect(window.location.hostname);
 React.renderComponent(React.createElement(Chat, null), document.body);

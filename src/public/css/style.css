@@ -62,12 +62,14 @@ html, body {
     top: 1em; }
 
 #modal {
-  display: block;
-  width: 100%;
+  position: absolute;
+  left: 40%;
+  top: 25%;
   height: 50%;
+  width: 30%;
   margin: 0 auto;
   z-index: 1;
-  background-color:green;
+  background-color: #3498db;
   visibility: hidden; }
   #modal h4 {
     margin-top: 0px; }

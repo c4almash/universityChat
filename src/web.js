@@ -108,6 +108,15 @@ app.post("/forgot-password", function(req, res) {
   });
 });
 
+app.post("/change-password", function(req, res) {
+  var email = req.cookies.token;
+  var currentPassword = req.body.currentPassword;
+  var newPassword = req.body.newPassword;
+  users.authenticate(email, currentPassword, function(reply) {
+    if (reply) {
+      users.setPassword(email, newPassword);
+    }});
+});
 
 function startsWith(base, str) {
   return base.substring( 0, str.length ) === str;

@@ -97,6 +97,19 @@ function userExists(email, callback) {
   });
 }
 
+function setPassword(email, newPassword, callback) {
+  if (newPassword.length < 5) {
+    var error = "Your password must be at least 5 characters.";
+    callback(error);
+    return;
+  }
+
+  var key = "user:" + email;
+  client.hmset(key, "password", newPassword, function(err, reply) {
+    callback(reply);
+  });
+}
+
 /* END OF PHASE 3 FUNCTIONS */
 
 exports.registerUser = registerUser;
@@ -104,3 +117,4 @@ exports.authenticate = authenticate;
 exports.isLoggedIn = isLoggedIn;
 exports.getPassword = getPassword;
 exports.userExists = userExists;
+exports.setPassword = setPassword;
