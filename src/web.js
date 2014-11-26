@@ -17,6 +17,10 @@ var rooms = require("./rooms");
 var users = require("./users");
 
 var seeds = require("./seeds");
+
+// reset database
+seeds.seed();
+
 // CONFIGURATION
 // Logging
 app.use(logfmt.requestLogger());
@@ -193,6 +197,4 @@ io.on("connection", function(socket) {
     //}
   });
 
-  // this should only run once.. shouldn't be here.
-  seeds.seed();
 });
