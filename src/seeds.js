@@ -11,10 +11,13 @@ client.on("error", function(err) {
 });
 
 function seed() {
-	rooms.createRoom("global", function(success) {
-      success? console.log('global room created.') : console.log('global room already exist.')
-    });
+	rooms.createRoom("global");
 	rooms.createRoom("csc301");
+	rooms.createRoom("compsci");
+	rooms.createRoom("biology");
+	rooms.createRoom("math");
+	rooms.createRoom("dota2");
+	rooms.createRoom("csgo");
 //	rooms.addUser("global", "studentA");
 //	rooms.addUser("global", "studentB");
 //	rooms.addMessage("global", { author: "studentA", text: "foo" });

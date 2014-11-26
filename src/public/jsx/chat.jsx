@@ -179,18 +179,24 @@ var MessageInput = React.createClass({
   handleEnter: function(e) {
     if (e.which == 13 && !e.shiftKey) {
       e.preventDefault();
-      var message = { author: this.props.username, text: this.state.text };
-      socket.emit("message", message, this.props.currentRoom);
+      if (this.state.text) {
+        var message = { author: this.props.username, text: this.state.text };
+        socket.emit("message", message, this.props.currentRoom);
+      }
       this.setState({text: ""});
     }
   },
   render: function() {
-    return (
-      <textarea id="message-input" className="animated"
+//    if (this.props.currentRoom) {
+      return (
+        <textarea id="message-input" className="animated"
                 placeholder="Write message..." value={this.state.text}
                 onChange={this.messageUpdated} onKeyDown={this.handleEnter}
-      />
-    );
+        />
+      );
+//    } else {
+//      return null;
+//    }
   }
 });
 
