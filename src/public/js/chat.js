@@ -65,7 +65,9 @@ var Chat = React.createClass({displayName: 'Chat',
     return (
       React.createElement("div", {id: "chat"}, 
         React.createElement("aside", {className: "sidebar pull-left"}, 
-          React.createElement(SubscribedRooms, {subscribedRooms: this.state.subscribedRooms, changeCurrentRoom: this.changeCurrentRoom}), 
+          React.createElement(SubscribedRooms, {currentRoom: this.state.currentRoom, 
+                           subscribedRooms: this.state.subscribedRooms, 
+                           changeCurrentRoom: this.changeCurrentRoom}), 
           React.createElement(RoomList, {rooms: this.state.rooms, changeCurrentRoom: this.changeCurrentRoom})
         ), 
         React.createElement(Conversation, {messages: this.state.messages}), 
@@ -123,8 +125,11 @@ var SubscribedRooms = React.createClass({displayName: 'SubscribedRooms',
   },
   render: function() {
     var renderRoom = function(room) {
-      // should strip out "ip" first
-      return (React.createElement("li", {id: room, onClick: this.changeRoom}, React.createElement("a", {href: "#"}, room)));
+      if (this.props.currentRoom == room) {
+        return (React.createElement("li", {id: room}, room));
+      } else {
+        return (React.createElement("li", {id: room, onClick: this.changeRoom}, React.createElement("a", {href: "#"}, room)));
+      }
     }.bind(this);
 
     return (React.createElement("ul", null, 
