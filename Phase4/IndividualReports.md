@@ -20,9 +20,12 @@
 
 ----
 
-## Name (GitHub username)
+## timothylai
 
-TODO: Fill in the report
+* My most significant contrubution was the implementation of the logout function #53.
+* While working on our web app, I learned about web programming using html, css, and js.
+* I try my best to be helpful to my team - I am not an experienced web programmer, but I did what I can by contributing to the team repository using knowledge of web programming I've learned over the month.
+* I could have learned more about web programming - I still do not understand the react framework we are using very well, if I've known better I would have contributed more.
 
 
 ----
