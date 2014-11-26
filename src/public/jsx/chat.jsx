@@ -176,9 +176,11 @@ var MessageInput = React.createClass({
   },
   handleEnter: function(e) {
     if (e.which == 13 && !e.shiftKey) {
+      if (this.state.text) {
+        var message = { author: this.props.username, text: this.state.text };
+        socket.emit("message", message, this.props.currentRoom);
+      }
       e.preventDefault();
-      var message = { author: this.props.username, text: this.state.text };
-      socket.emit("message", message, this.props.currentRoom);
       this.setState({text: ""});
     }
   },
