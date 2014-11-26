@@ -183,12 +183,16 @@ var MessageInput = React.createClass({
     }
   },
   render: function() {
-    return (
-      <textarea id="message-input" className="animated"
+    if (this.props.currentRoom) {
+      return (
+        <textarea id="message-input" className="animated"
                 placeholder="Write message..." value={this.state.text}
                 onChange={this.messageUpdated} onKeyDown={this.handleEnter}
       />
-    );
+      );
+    } else {
+      return null;
+    }
   }
 });
 

@@ -61,15 +61,15 @@ var Chat = React.createClass({displayName: 'Chat',
   },
   render: function() {
     return (
-      React.createElement("div", {id: "chat"}, 
-        React.createElement("aside", null, 
-          React.createElement(OptionList, null), 
-          React.createElement(UserList, {username: this.state.username, users: this.state.users})
+      React.DOM.div({id: "chat"}, 
+        React.DOM.aside(null, 
+          OptionList(null), 
+          UserList({username: this.state.username, users: this.state.users})
         ), 
-        React.createElement(RoomList, {rooms: this.state.rooms, changeCurrentRoom: this.changeCurrentRoom}), 
-        React.createElement(SubscribedRooms, {subscribedRooms: this.state.subscribedRooms, changeCurrentRoom: this.changeCurrentRoom}), 
-        React.createElement(Conversation, {messages: this.state.messages}), 
-        React.createElement(MessageInput, {username: this.state.username, currentRoom: this.state.currentRoom})
+        RoomList({rooms: this.state.rooms, changeCurrentRoom: this.changeCurrentRoom}), 
+        SubscribedRooms({subscribedRooms: this.state.subscribedRooms, changeCurrentRoom: this.changeCurrentRoom}), 
+        Conversation({messages: this.state.messages}), 
+        MessageInput({username: this.state.username, currentRoom: this.state.currentRoom})
       )
     );
   }
@@ -83,9 +83,9 @@ var OptionList = React.createClass({displayName: 'OptionList',
       window.location.reload();
     }
     return (
-      React.createElement("div", {className: "options"}, 
-        React.createElement("ul", null, 
-          React.createElement("li", {id: "logout", onClick: logout}, React.createElement("a", {href: ""}, "Sign out"))
+      React.DOM.div({className: "options"}, 
+        React.DOM.ul(null, 
+          React.DOM.li({id: "logout", onClick: logout}, React.DOM.a({href: ""}, "Sign out"))
         )
       )
     );
@@ -101,11 +101,11 @@ var RoomList = React.createClass({displayName: 'RoomList',
   render: function() {
     var renderRoom = function(room) {
       // should strip out "ip" first
-      return (React.createElement("li", {id: room, onClick: this.subscribeRoom}, room));
+      return (React.DOM.li({id: room, onClick: this.subscribeRoom}, room));
     }.bind(this);
     return (
-        React.createElement("ul", null, 
-          React.createElement("li", null, "All Rooms"), 
+        React.DOM.ul(null, 
+          React.DOM.li(null, "All Rooms"), 
           this.props.rooms.map(renderRoom)
         )
     );
@@ -120,11 +120,11 @@ var SubscribedRooms = React.createClass({displayName: 'SubscribedRooms',
   render: function() {
     var renderRoom = function(room) {
       // should strip out "ip" first
-      return (React.createElement("li", {id: room, onClick: this.changeRoom}, room));
+      return (React.DOM.li({id: room, onClick: this.changeRoom}, room));
     }.bind(this);
 
-    return (React.createElement("ul", null, 
-              React.createElement("li", null, "Subscribed Rooms"), 
+    return (React.DOM.ul(null, 
+              React.DOM.li(null, "Subscribed Rooms"), 
               this.props.subscribedRooms.map(renderRoom)
       ))
   }
@@ -136,13 +136,13 @@ var UserList = React.createClass({displayName: 'UserList',
       if (user == this.props.username) {
         return null;
       } else {
-        return (React.createElement("li", null, user));
+        return (React.DOM.li(null, user));
       }
     }.bind(this);
     return (
-      React.createElement("div", null, 
-        React.createElement("ul", null, 
-          this.props.username ? React.createElement("li", {id: "user"}, this.props.username) : null, 
+      React.DOM.div(null, 
+        React.DOM.ul(null, 
+          this.props.username ? React.DOM.li({id: "user"}, this.props.username) : null, 
           this.props.users.map(renderUser)
         )
       )
@@ -154,16 +154,16 @@ var UserList = React.createClass({displayName: 'UserList',
 var Conversation = React.createClass({displayName: 'Conversation',
   render: function() {
     var renderMessage = function(message) {
-      return React.createElement(Message, {author: message.author, text: message.text})
+      return Message({author: message.author, text: message.text})
     };
-    return (React.createElement("ul", {id: "conversation"}, this.props.messages.map(renderMessage)));
+    return (React.DOM.ul({id: "conversation"}, this.props.messages.map(renderMessage)));
   }
 });
 
 var Message = React.createClass({displayName: 'Message',
   render: function() {
     var message = this.props.author + ": " + this.props.text;
-    return (React.createElement("li", null, message));
+    return (React.DOM.li(null, message));
   }
 });
 
@@ -183,12 +183,16 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
     }
   },
   render: function() {
-    return (
-      React.createElement("textarea", {id: "message-input", className: "animated", 
+    if (this.props.currentRoom) {
+      return (
+        React.DOM.textarea({id: "message-input", className: "animated", 
                 placeholder: "Write message...", value: this.state.text, 
                 onChange: this.messageUpdated, onKeyDown: this.handleEnter}
       )
-    );
+      );
+    } else {
+      return null;
+    }
   }
 });
 
@@ -198,4 +202,4 @@ function scrollChatToBottom() {
 }
 
 var socket = io.connect(window.location.hostname);
-React.renderComponent(React.createElement(Chat, null), document.body);
+React.renderComponent(Chat(null), document.body);
