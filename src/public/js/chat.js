@@ -7,7 +7,7 @@ var Chat = React.createClass({displayName: 'Chat',
       username: null,
       rooms: [],
       subscribedRooms: [],
-      currentRoom: null,
+      currentRoom: "global",
       users: [],
       messages: []
     };
@@ -33,6 +33,8 @@ var Chat = React.createClass({displayName: 'Chat',
       rooms: data.rooms,
       subscribedRooms: data.subscribedRooms
     });
+
+    socket.emit("roomjoin", this.state.currentRoom);
 
     // need to get all rooms history
     scrollChatToBottom();
@@ -187,16 +189,12 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
     }
   },
   render: function() {
-//    if (this.props.currentRoom) {
       return (
         React.createElement("textarea", {id: "message-input", className: "animated", 
                 placeholder: "Write message...", value: this.state.text, 
                 onChange: this.messageUpdated, onKeyDown: this.handleEnter}
         )
       );
-//    } else {
-//      return null;
-//    }
   }
 });
 
