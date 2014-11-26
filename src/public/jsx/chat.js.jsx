@@ -71,9 +71,9 @@ var Modal = React.createClass({
     return (<div id="modal">
       <form class="change-password-form" action="change-password" method="POST">
       <div class="form-group">
-      <input type="text" id="current-password" placeholder="Enter your current password" name="currentPassword" value={currentPassword} onChange={this.handleChange} class="form-control login-field"/>
+      <input type="password" id="current-password" placeholder="Enter your current password" name="currentPassword" value={currentPassword} onChange={this.handleChange} class="form-control login-field"/>
       <p></p>
-      <input type="text" id="new-password" placeholder="Enter your new password" name="newPassword" value={newPassword} onChange={this.handleChange} class="form-control login-field"/>
+      <input type="password" id="new-password" placeholder="Enter your new password" name="newPassword" value={newPassword} onChange={this.handleChange} class="form-control login-field"/>
       </div>
       <input type="submit" class="btn btn-primary btn-lg btn-block" value="Change password"/>
       </form>

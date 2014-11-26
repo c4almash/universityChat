@@ -114,7 +114,16 @@ app.post("/change-password", function(req, res) {
   var newPassword = req.body.newPassword;
   users.authenticate(email, currentPassword, function(reply) {
     if (reply) {
-      users.setPassword(email, newPassword);
+      users.setPassword(email, newPassword, function(err) {
+        if (err) {
+          console.log("Less than 5 char");
+        }
+        else {
+          res.redirect("/");
+        }
+      });
+    } else {
+      console.log("Didn't authenticate");
     }});
 });
 

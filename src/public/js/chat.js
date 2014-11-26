@@ -71,9 +71,9 @@ var Modal = React.createClass({displayName: 'Modal',
     return (React.createElement("div", {id: "modal"}, 
       React.createElement("form", {class: "change-password-form", action: "change-password", method: "POST"}, 
       React.createElement("div", {class: "form-group"}, 
-      React.createElement("input", {type: "text", id: "current-password", placeholder: "Enter your current password", name: "currentPassword", value: currentPassword, onChange: this.handleChange, class: "form-control login-field"}), 
+      React.createElement("input", {type: "password", id: "current-password", placeholder: "Enter your current password", name: "currentPassword", value: currentPassword, onChange: this.handleChange, class: "form-control login-field"}), 
       React.createElement("p", null), 
-      React.createElement("input", {type: "text", id: "new-password", placeholder: "Enter your new password", name: "newPassword", value: newPassword, onChange: this.handleChange, class: "form-control login-field"})
+      React.createElement("input", {type: "password", id: "new-password", placeholder: "Enter your new password", name: "newPassword", value: newPassword, onChange: this.handleChange, class: "form-control login-field"})
       ), 
       React.createElement("input", {type: "submit", class: "btn btn-primary btn-lg btn-block", value: "Change password"})
       )

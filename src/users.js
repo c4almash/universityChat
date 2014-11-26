@@ -106,7 +106,7 @@ function setPassword(email, newPassword, callback) {
 
   var key = "user:" + email;
   client.hmset(key, "password", newPassword, function(err, reply) {
-    callback(reply);
+    callback(null);
   });
 }
 
