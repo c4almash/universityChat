@@ -68,7 +68,9 @@ var Chat = React.createClass({
           <SubscribedRooms currentRoom={this.state.currentRoom}
                            subscribedRooms={this.state.subscribedRooms}
                            changeCurrentRoom={this.changeCurrentRoom} />
-          <RoomList rooms={this.state.rooms} changeCurrentRoom={this.changeCurrentRoom} />
+          <RoomList currentRoom={this.state.currentRoom}
+                    rooms={this.state.rooms}
+                    changeCurrentRoom={this.changeCurrentRoom} />
         </aside>
         <Conversation messages={this.state.messages} />
         <aside className="sidebar pull-right">
@@ -106,8 +108,11 @@ var RoomList = React.createClass({
   },
   render: function() {
     var renderRoom = function(room) {
-      // should strip out "ip" first
-      return (<li id={room} onClick={this.subscribeRoom}><a href="#">{room}</a></li>);
+      if (this.props.currentRoom == room) {
+        return (<li id={room}>{room}</li>);
+      } else {
+        return (<li id={room} onClick={this.subscribeRoom}><a href="#">{room}</a></li>);
+      }
     }.bind(this);
     return (
         <ul>
