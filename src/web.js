@@ -116,6 +116,7 @@ app.post("/change-password", function(req, res) {
     if (reply) {
       users.setPassword(email, newPassword, function(err) {
         if (err) {
+          res.response(400).send("less than 5 char");
           console.log("Less than 5 char");
         }
         else {
