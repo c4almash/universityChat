@@ -38,13 +38,11 @@ var Chat = React.createClass({displayName: 'Chat',
 
     socket.emit("roomjoin", this.state.currentRoom);
 
-    // need to get all rooms history
     scrollChatToBottom();
   },
   getMessages: function(messages) {
-    console.log("got messages..");
     this.setState({messages: messages});
-    //scrollChatToBottom(); // only if it's the one we're currently in
+    scrollChatToBottom(); // only if it's the one we're currently in
   },
   getUsers: function(users) {
     this.setState({users: users});
@@ -57,6 +55,7 @@ var Chat = React.createClass({displayName: 'Chat',
     socket.emit("roomleave", this.state.currentRoom);
     socket.emit("roomjoin", room);
     this.setState({currentRoom: room});
+    scrollChatToBottom();
   },
   render: function() {
     return (
@@ -201,8 +200,10 @@ var MessageInput = React.createClass({displayName: 'MessageInput',
   },
   messageUpdated: function(e) {
     this.setState({text: e.target.value});
+    scrollChatToBottom();
   },
   handleEnter: function(e) {
+    scrollChatToBottom();
     if (e.which == 13 && !e.shiftKey) {
       e.preventDefault();
       if (this.state.text) {

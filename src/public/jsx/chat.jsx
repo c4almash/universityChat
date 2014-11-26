@@ -55,6 +55,7 @@ var Chat = React.createClass({
     socket.emit("roomleave", this.state.currentRoom);
     socket.emit("roomjoin", room);
     this.setState({currentRoom: room});
+    scrollChatToBottom();
   },
   render: function() {
     return (
@@ -88,7 +89,7 @@ var OptionList = React.createClass({
     return (
       <div className="options">
         <ul>
-          <li id="logout" onClick={logout}><a href="#">Sign out</a></li>;
+          <li id="logout" onClick={logout}><a href="#">Sign out</a></li>
         </ul>
       </div>
     );
@@ -199,8 +200,10 @@ var MessageInput = React.createClass({
   },
   messageUpdated: function(e) {
     this.setState({text: e.target.value});
+    scrollChatToBottom();
   },
   handleEnter: function(e) {
+    scrollChatToBottom();
     if (e.which == 13 && !e.shiftKey) {
       e.preventDefault();
       if (this.state.text) {
