@@ -73,9 +73,49 @@ var Chat = React.createClass({
           <OptionList />
           <UserList username={this.state.username} users={this.state.users} />
         </aside>
+        <Modal />
         <MessageInput username={this.state.username} currentRoom={this.state.currentRoom} />
       </div>
     );
+  }
+});
+
+var Modal = React.createClass({
+  getInitialState: function() {
+    return {
+      currentPassword: "",
+      newPassword: ""};
+  },
+  handleChange: function(event) {
+    this.setState({currentPassword: event.target.value});
+    this.setState({newPassword: event.target.value});
+  },
+  render: function() {
+    var currentPassword = this.state.value;
+    var newPassword = this.state.value;
+    return (
+      <div id="modal">
+        <form class="change-password-form" action="change-password" method="POST">
+          <div class="form-group">
+            <input type="password" id="current-password" placeholder="Enter your current password" name="currentPassword"
+                value={currentPassword} onChange={this.handleChange} class="form-control login-field"/>
+            <input type="password" id="new-password" placeholder="Enter your new password" name="newPassword"
+                value={newPassword} onChange={this.handleChange} class="form-control login-field"/>
+          </div>
+          <input type="submit" id="change-password-button" class="btn btn-primary btn-lg btn-block" value="Change password"/>
+        </form>
+      </div>
+    )
+  }
+});
+
+var ChangePassword = React.createClass({
+  handleClick: function(e) {
+    var elem = document.getElementById("modal");
+    elem.style.visibility = "visible";
+  },
+  render: function() {
+    return (<button onClick={this.handleClick}>Change password</button>);
   }
 });
 
@@ -90,6 +130,7 @@ var OptionList = React.createClass({
       <div className="options">
         <ul>
           <li id="logout" onClick={logout}><a href="#">Sign out</a></li>
+          <ChangePassword />
         </ul>
       </div>
     );

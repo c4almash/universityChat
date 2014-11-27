@@ -17,7 +17,7 @@ function seed() {
 	rooms.createRoom("biology");
 	rooms.createRoom("math");
 	rooms.createRoom("dota2");
-	rooms.createRoom("csgo");
+	rooms.createRoom("cs:go");
 //	rooms.addUser("global", "studentA");
 //	rooms.addUser("global", "studentB");
 //	rooms.addMessage("global", { author: "studentA", text: "foo" });

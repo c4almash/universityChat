@@ -108,6 +108,25 @@ app.post("/forgot-password", function(req, res) {
   });
 });
 
+app.post("/change-password", function(req, res) {
+  var email = req.cookies.token;
+  var currentPassword = req.body.currentPassword;
+  var newPassword = req.body.newPassword;
+  console.log(email, currentPassword, newPassword);
+  users.authenticate(email, currentPassword, function(reply) {
+    if (reply) {
+      users.setPassword(email, newPassword, function(err) {
+        if (err) {
+          console.log("Less than 5 char");
+        }
+      });
+    } else {
+      console.log("Didn't authenticate");
+    }
+  res.redirect("/");
+  });
+});
+
 function startsWith(base, str) {
   return base.substring( 0, str.length ) === str;
 }

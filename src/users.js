@@ -99,6 +99,19 @@ function userExists(email, callback) {
   });
 }
 
+function setPassword(email, newPassword, callback) {
+  if (newPassword.length < 5) {
+    var error = "Your password must be at least 5 characters.";
+    callback(error);
+    return;
+  }
+
+  var key = "user:" + email;
+  client.hmset(key, "password", newPassword, function(err, reply) {
+    callback(null);
+  });
+}
+
 /* END OF PHASE 3 FUNCTIONS */
 
 // uses JSON to store list of rooms.
@@ -163,3 +176,4 @@ exports.userExists = userExists;
 exports.subscribeToRoom = subscribeToRoom;
 exports.unsubscribeFromRoom = unsubscribeFromRoom;
 exports.getSubscribedRooms = getSubscribedRooms;
+exports.setPassword = setPassword;
