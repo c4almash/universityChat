@@ -90,6 +90,10 @@ var Modal = React.createClass({
     this.setState({currentPassword: event.target.value});
     this.setState({newPassword: event.target.value});
   },
+  handleClickCancel: function(e) {
+    var elem = document.getElementById("modal");
+    elem.style.visibility = "hidden";
+  },
   render: function() {
     var currentPassword = this.state.value;
     var newPassword = this.state.value;
@@ -104,6 +108,7 @@ var Modal = React.createClass({
           </div>
           <input type="submit" id="change-password-button" class="btn btn-primary btn-lg btn-block" value="Change password"/>
         </form>
+        <button id="change-password-cancel" onClick={this.handleClickCancel}>Cancel</button>
       </div>
     )
   }
@@ -115,7 +120,7 @@ var ChangePassword = React.createClass({
     elem.style.visibility = "visible";
   },
   render: function() {
-    return (<button onClick={this.handleClick}>Change password</button>);
+    return (<button id="change-pw-btn" onClick={this.handleClick}>Change password</button>);
   }
 });
 
