@@ -24,9 +24,10 @@
 ## SunnyLi
 
  * My most significant contrubution for phase 4 was helping Lawrence to complete the multi-room functionality
-   implemented in PR #52. There were some bugs on the server-side code initially that stopped the application
-   from functioning properly. I located the problem and fixed it so the application works again and the
-   pull request can be merged.
+   implemented in PR [#52](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/pull/52)
+   [specifically](https://github.com/csc301-fall2014/Proj-Evening-Team1-repo/commit/6694ad481ab).
+   There were some bugs on the server-side code initially that stopped the application from functioning properly.
+   I located the problem and fixed it so the application works again and the pull request can be merged.
  * While working on our web based chat application, I learned a great deal about the ReactJS framework
    and acquired a bit more experience working with nodejs.
  * I am always looking out for my teammates - I helped Timothy set up his development environment,
