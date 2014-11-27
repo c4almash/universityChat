@@ -9,7 +9,7 @@
 
 ## g3aishih
 
- * My most significant individual contribution was implementing the functions dealing with passwords (ie, change password, forgot password)@commit: b7f5418 Pull Request #58.
+ * My most significant individual contribution was implementing the functions dealing with passwords (ie, change password, forgot password).
  * I learned about the process to move and process data in the backend. I learned basic concepts of node.js, cookies and post/get requests. I had very limited experience working with these before this project.
  * I learn things pretty quickly, when given new tasks to conquer using an unfamiliar language, I was able to learn the material needed to complete the task in an small amount of time.
  * I had little to no prior experience working with some of the frameworks we used in this project so I could not reach out and help my teammates when they had an issue in their code. I should have worked with my teammates to solve issues which can affect the entire project rather than just focusing on my code alone.
@@ -43,9 +43,10 @@
  * My main strength being in the team is that I know my ability and tried my best to assist team members to write good codes. I did a lot of write ups and helped communicate with TA and professor.
  * I could have spent more time to learn and understand the underlying logic and framework of our project, so that I could work at the same pace with my teammates.
 
-## c4darmin
+## c4alamsh
 
- * My most significant individual contribution was in front end debugging, usually by enforcing input sanity and restricting components to certain dimensions even with large inputs.
- * I learned a lot about git, especially the benefits of the issue system, version control and conflict resolution.
- * My main strength was communicating tasks with the team and also debugging. I was the only one to discover a number of issues that occured if sufficiently annoying inputs were used to register.
- * If I had managed my time better, I could have made our app responsive and look great across all platforms (phones, tablets, laptops, desktops).
+ * My most significant individual contribution is helping/setting the hardware. I spent a lot of time outside github trying to get the web app running locally on my PC using a hotspot and local domain.
+ * I learned a lot about web hosting and setting up servers. It took a lot of testing and tinkering to get the site running.
+ * My main strength in the team is organizing the workflow and making sure everyone knows what we are presenting next, whether TA demo or presenting to the class.
+ * I could have spent more time learning and walking through the different coding styles/tricks other team members had therefor improving my own coding abilities. I however, always felt at a loss in time due to other assignments or classes.
+
