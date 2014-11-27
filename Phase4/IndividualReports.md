@@ -36,5 +36,11 @@
    the problem have already been fixed. I also resolve a lot of merge conflicts so that pull requests
    can be accepted.
 
+## g3abby
+
+ * My most significant individual contribution is to help in the front-end development.
+ * I learned web programming languages, html, javascript, and css. And some basic knowledge of node.js.
+ * My main strength being in the team is that I know my ability and tried my best to assist team members to write good codes. I did a lot of write ups and helped communicate with TA and professor.
+ * I could have spent more time to learn and understand the underlying logic and framework of our project, so that I could work at the same pace with my teammates.
 
 ...
