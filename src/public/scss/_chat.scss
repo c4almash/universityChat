@@ -26,16 +26,16 @@ html, body {
     overflow-y: scroll;
 }
 
-.modal {
-  display: block;
-  width: 100%;
-
+#modal {
+  position: fixed;
+  left: 40%;
+  top: 25%;
+  height: auto;
+  width: 30%;
   margin: 0 auto;
-  z-index: 1;
-
-  h4 {
-    margin-top: 0px;
-  }
+  padding: 10px;
+  background-color: #3498db;
+  visibility: hidden;
 }
 
 ul {
@@ -114,4 +114,9 @@ textarea {
   border-radius: 0.2em;
   outline: none;
   resize: none;
+}
+
+#current-password, #new-password, #change-password-button {
+  width: 96%;
+  margin: 2%;
 }
