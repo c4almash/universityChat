@@ -58,14 +58,13 @@ html, body {
   overflow-y: scroll; }
 
 #modal {
-  display: fixed;
+  position: fixed;
   left: 40%;
   top: 25%;
   height: auto;
   width: 30%;
   margin: 0 auto;
   padding: 10px;
-  z-index: 1;
   background-color: #3498db;
   visibility: hidden; }
 
