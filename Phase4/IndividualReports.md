@@ -1,15 +1,11 @@
 # Individual Reports
 
------
-
 ## oneohtrix
 
  * My most significant individual contribution was implementing multi-room functionality, which was tricky.
  * I learned the value of a DAO when creating one to abstract away the interface for creating domain-specific objects.
  * My main strength is the experience I have working in web development.
  * I could have kept people more informed of what I was doing, since one of my PRs required a substantial merge since it had many conflicts.
-
-----
 
 ## g3aishih
 
@@ -18,8 +14,6 @@
  * I learn things pretty quickly, when given new tasks to conquer using an unfamiliar language, I was able to learn the material needed to complete the task in an small amount of time.
  * I had little to no prior experience working with some of the frameworks we used in this project so I could not reach out and help my teammates when they had an issue in their code. I should have worked with my teammates to solve issues which can affect the entire project rather than just focusing on my code alone.
 
-----
-
 ## timothylai
 
 * My most significant contrubution was the implementation of the logout function #53.
@@ -27,9 +21,20 @@
 * I try my best to be helpful to my team - I am not an experienced web programmer, but I did what I can by contributing to the team repository using knowledge of web programming I've learned over the month.
 * I could have learned more about web programming - I still do not understand the react framework we are using very well, if I've known better I would have contributed more.
 
+## SunnyLi
 
-----
+ * My most significant contrubution for phase 4 was helping Lawrence to complete the multi-room functionality
+   implemented in PR #52. There were some bugs on the server-side code initially that stopped the application
+   from functioning properly. I located the problem and fixed it so the application works again and the
+   pull request can be merged.
+ * While working on our web based chat application, I learned a great deal about the ReactJS framework
+   and acquired a bit more experience working with nodejs.
+ * I am always looking out for my teammates - I helped Timothy set up his development environment,
+   and get up to speed with the tools we've used such as the sass command line tool for compiling
+   scss to vanilla css styles and react-tools to compile react jsx templates to plain javascript.
+ * I frequently manage the issues list by adding related labels to it and also closing issues where
+   the problem have already been fixed. I also resolve a lot of merge conflicts so that pull requests
+   can be accepted.
+
 
 ...
-
-
