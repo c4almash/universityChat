@@ -43,4 +43,9 @@
  * My main strength being in the team is that I know my ability and tried my best to assist team members to write good codes. I did a lot of write ups and helped communicate with TA and professor.
  * I could have spent more time to learn and understand the underlying logic and framework of our project, so that I could work at the same pace with my teammates.
 
-...
+## c4darmin
+
+ * My most significant individual contribution was in front end debugging, usually by enforcing input sanity and restricting components to certain dimensions even with large inputs.
+ * I learned a lot about git, especially the benefits of the issue system, version control and conflict resolution.
+ * My main strength was communicating tasks with the team and also debugging. I was the only one to discover a number of issues that occured if sufficiently annoying inputs were used to register.
+ * If I had managed my time better, I could have made our app responsive and look great across all platforms (phones, tablets, laptops, desktops).
