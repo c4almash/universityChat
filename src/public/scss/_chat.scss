@@ -116,7 +116,12 @@ textarea {
   resize: none;
 }
 
-#current-password, #new-password, #change-password-button {
+#current-password, #new-password, #change-password-button, #change-password-cancel {
   width: 96%;
   margin: 2%;
+}
+
+#change-pw-btn, #change-pw-btn:active {
+  border: 0;
+  background: transparent;
 }

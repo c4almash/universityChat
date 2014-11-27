@@ -73,9 +73,54 @@ var Chat = React.createClass({displayName: 'Chat',
           React.createElement(OptionList, null), 
           React.createElement(UserList, {username: this.state.username, users: this.state.users})
         ), 
+        React.createElement(Modal, null), 
         React.createElement(MessageInput, {username: this.state.username, currentRoom: this.state.currentRoom})
       )
     );
+  }
+});
+
+var Modal = React.createClass({displayName: 'Modal',
+  getInitialState: function() {
+    return {
+      currentPassword: "",
+      newPassword: ""};
+  },
+  handleChange: function(event) {
+    this.setState({currentPassword: event.target.value});
+    this.setState({newPassword: event.target.value});
+  },
+  handleClickCancel: function(e) {
+    var elem = document.getElementById("modal");
+    elem.style.visibility = "hidden";
+  },
+  render: function() {
+    var currentPassword = this.state.value;
+    var newPassword = this.state.value;
+    return (
+      React.createElement("div", {id: "modal"}, 
+        React.createElement("form", {class: "change-password-form", action: "change-password", method: "POST"}, 
+          React.createElement("div", {class: "form-group"}, 
+            React.createElement("input", {type: "password", id: "current-password", placeholder: "Enter your current password", name: "currentPassword", 
+                value: currentPassword, onChange: this.handleChange, class: "form-control login-field"}), 
+            React.createElement("input", {type: "password", id: "new-password", placeholder: "Enter your new password", name: "newPassword", 
+                value: newPassword, onChange: this.handleChange, class: "form-control login-field"})
+          ), 
+          React.createElement("input", {type: "submit", id: "change-password-button", class: "btn btn-primary btn-lg btn-block", value: "Change password"})
+        ), 
+        React.createElement("button", {id: "change-password-cancel", onClick: this.handleClickCancel}, "Cancel")
+      )
+    )
+  }
+});
+
+var ChangePassword = React.createClass({displayName: 'ChangePassword',
+  handleClick: function(e) {
+    var elem = document.getElementById("modal");
+    elem.style.visibility = "visible";
+  },
+  render: function() {
+    return (React.createElement("button", {id: "change-pw-btn", onClick: this.handleClick}, "Change password"));
   }
 });
 
@@ -89,7 +134,8 @@ var OptionList = React.createClass({displayName: 'OptionList',
     return (
       React.createElement("div", {className: "options"}, 
         React.createElement("ul", null, 
-          React.createElement("li", {id: "logout", onClick: logout}, React.createElement("a", {href: "#"}, "Sign out"))
+          React.createElement("li", {id: "logout", onClick: logout}, React.createElement("a", {href: "#"}, "Sign out")), 
+          React.createElement(ChangePassword, null)
         )
       )
     );
