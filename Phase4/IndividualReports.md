@@ -45,8 +45,8 @@
 
 ## c4alamsh
 
- * My most significant individual contribution is helping/setting the hardware. I spent a lot of time outside github trying to get the web app running locally on my PC using a hotspot and local domain.
+ * My most significant individual contribution is co-ordinating/setting-up the hardware. I spent a lot of time outside github trying to get the web app running locally on my PC using a wifi hotspot and a local host.
  * I learned a lot about web hosting and setting up servers. It took a lot of testing and tinkering to get the site running.
  * My main strength in the team is organizing the workflow and making sure everyone knows what we are presenting next, whether TA demo or presenting to the class.
- * I could have spent more time learning and walking through the different coding styles/tricks other team members had therefor improving my own coding abilities. I however, always felt at a loss in time due to other assignments or classes.
+ * I could have spent more time learning and walking through the different coding styles/tricks other team members had hence improving my own coding abilities. I however, always felt at a loss in time due to other assignments or classes.
 
