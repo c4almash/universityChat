@@ -9,7 +9,7 @@
 
 ## g3aishih
 
- * My most significant individual contribution was implementing the functions dealing with passwords (ie, change password, forgot password).
+ * My most significant individual contribution was implementing the functions dealing with passwords (ie, change password, forgot password)@commit: b7f5418 Pull Request #58.
  * I learned about the process to move and process data in the backend. I learned basic concepts of node.js, cookies and post/get requests. I had very limited experience working with these before this project.
  * I learn things pretty quickly, when given new tasks to conquer using an unfamiliar language, I was able to learn the material needed to complete the task in an small amount of time.
  * I had little to no prior experience working with some of the frameworks we used in this project so I could not reach out and help my teammates when they had an issue in their code. I should have worked with my teammates to solve issues which can affect the entire project rather than just focusing on my code alone.
