@@ -10,6 +10,7 @@ associated with the chat rooms and the users. We have created two DAOs: one that
 interfaces as a library to perform actions on chat rooms and one for users. That
 way, our main webserver need not be concerned with talking to redis at all, and
 only needs to make calls such as createRoom(roomName).
+
 On the front end, we made extensive use of Facebook's React library to make our
 app interactive. React lets us manage state easily by creating reusable components.
 The front-end of our chat app is enclosed in a big Chat component, which in it
@@ -23,6 +24,7 @@ when new information comes in: the handlers update the state of the component,
 which React then sees, calculates the DOM difference and generates the minimal
 amount of javascript to update the page. We also used Sass to generate our
 stylesheets.
+
 One of the most significant architectural decisions is our use of Javascript
 throughout the technology stack. This was a good decision, for several reasons:
 Javascript is an easy language to learn, node.js (which powers the backend) is
