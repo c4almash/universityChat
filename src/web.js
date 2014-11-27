@@ -112,20 +112,19 @@ app.post("/change-password", function(req, res) {
   var email = req.cookies.token;
   var currentPassword = req.body.currentPassword;
   var newPassword = req.body.newPassword;
+  console.log(email, currentPassword, newPassword);
   users.authenticate(email, currentPassword, function(reply) {
     if (reply) {
       users.setPassword(email, newPassword, function(err) {
         if (err) {
-          res.response(400).send("less than 5 char");
           console.log("Less than 5 char");
-        }
-        else {
-          res.redirect("/");
         }
       });
     } else {
       console.log("Didn't authenticate");
-    }});
+    }
+  res.redirect("/");
+  });
 });
 
 function startsWith(base, str) {

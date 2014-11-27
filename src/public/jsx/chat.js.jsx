@@ -65,27 +65,16 @@ var Modal = React.createClass({
     this.setState({currentPassword: event.target.value});
     this.setState({newPassword: event.target.value});
   },
-  submit: function() {
-    var form = {currentPassword: this.state.currentPassword, newPassword: this.state.newPassword};
-    $.post("change-password", form, function(result, body, status){
-      console.log(result);
-      if (status == 400) {
-         toatsr display error eith messaeg
-      }
-      }
-    })
-  },
   render: function() {
     var currentPassword = this.state.value;
     var newPassword = this.state.value;
     return (<div id="modal">
-      <form class="change-password-form">// action="change-password" method="POST">
+      <form class="change-password-form" action="change-password" method="POST">
       <div class="form-group">
       <input type="password" id="current-password" placeholder="Enter your current password" name="currentPassword" value={currentPassword} onChange={this.handleChange} class="form-control login-field"/>
-      <p></p>
       <input type="password" id="new-password" placeholder="Enter your new password" name="newPassword" value={newPassword} onChange={this.handleChange} class="form-control login-field"/>
       </div>
-      <input type="submit" class="btn btn-primary btn-lg btn-block" onClick={this.submit} value="Change password"/>
+      <input type="submit" id="change-password-button" class="btn btn-primary btn-lg btn-block" value="Change password"/>
       </form>
       </div>)
   }
