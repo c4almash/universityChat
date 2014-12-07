@@ -18,24 +18,24 @@ html, body {
 
 #chat {
     position: absolute;
-    width: 100%;
-    top: 1em;
+    top: 0em;
     left: 0em;
-    right: 0em;
+    right: -1em;
     bottom: 5em;
+    margin: 1em;
     overflow-y: scroll;
 }
 
-.modal {
-  display: block;
-  width: 100%;
-
+#modal {
+  position: fixed;
+  left: 40%;
+  top: 25%;
+  height: auto;
+  width: 30%;
   margin: 0 auto;
-  z-index: 1;
-
-  h4 {
-      margin-top: 0px;
-  }
+  padding: 10px;
+  background-color: #3498db;
+  visibility: hidden;
 }
 
 ul {
@@ -43,25 +43,62 @@ ul {
     display: inline-block;
     overflow: auto;
     width: 85%;
+    padding-left:0px;
     list-style-type: none;
     li {
         width: 100%;
-        word-wrap: break-word;
         float: left;
+        text-overflow: ellipsis;
+        max-height:26px;
+        white-space: nowrap;
+        overflow: hidden;
     }
     li#user {
         color: #3498DB;
         font-weight: bold;
         margin-bottom:15px;
     }
+
+    .message {
+    }
+
+    .event {
+        font-style: italic;
+        color: #95a5a6;
+    }
 }
 
-aside {
-    position: fixed;
+.sidebar {
+  #logout > a {
+    color: #c0392b;
+    &:hover {
+      color: #e74c3c;
+    }
+  }
+
+  &.pull-left {
+    position:fixed;
+    width: 20%;
+
+    a {
+      color: #95a5a6;
+    }
+  }
+  &.pull-right {
+    position:fixed;
+    right: 0%;
+    width: 25%;
+
     text-align: right;
-    right: 1em;
-    width: 10em;
+  }
 }
+
+#conversation {
+  position: absolute;
+  left: 20%;
+  width: 60%;
+}
+
 textarea {
   position: fixed;
   width: 95%;
@@ -79,4 +116,12 @@ textarea {
   resize: none;
 }
 
+#current-password, #new-password, #change-password-button, #change-password-cancel {
+  width: 96%;
+  margin: 2%;
+}
 
+#change-pw-btn, #change-pw-btn:active {
+  border: 0;
+  background: transparent;
+}

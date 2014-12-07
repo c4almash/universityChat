@@ -16,11 +16,14 @@ var rooms = require("./rooms");
 // Library for managing users
 var users = require("./users");
 
+var seeds = require("./seeds");
+
+// reset database
+seeds.seed();
+
 // CONFIGURATION
 // Logging
 app.use(logfmt.requestLogger());
-// For viewing ips
-app.enable("trust proxy");
 // For parsing body for post params
 app.use(bodyParser.urlencoded({ extended: false }));
 // For parsing cookies
@@ -62,9 +65,7 @@ app.post("/login", function(req, res) {
           // user already exist => wrong sign-in info
           res.cookie("alert", err);
         } else {
-          // registeriation success, prompt sign-in
-          res.cookie("alert", "Congratz, you are now one of us. " +
-            "Sign-in again with the same credential you've just used.");
+          res.cookie("token", cookie);
         }
         res.redirect("/");
       });
@@ -107,11 +108,22 @@ app.post("/forgot-password", function(req, res) {
   });
 });
 
-
-// User asked to create a room
-app.post("/", function(req, res) {
-  rooms.createRoom(req.ip, req.body.privacy, function(room) {
-    res.redirect(room);
+app.post("/change-password", function(req, res) {
+  var email = req.cookies.token;
+  var currentPassword = req.body.currentPassword;
+  var newPassword = req.body.newPassword;
+  console.log(email, currentPassword, newPassword);
+  users.authenticate(email, currentPassword, function(reply) {
+    if (reply) {
+      users.setPassword(email, newPassword, function(err) {
+        if (err) {
+          console.log("Less than 5 char");
+        }
+      });
+    } else {
+      console.log("Didn't authenticate");
+    }
+  res.redirect("/");
   });
 });
 
@@ -122,48 +134,97 @@ function startsWith(base, str) {
 // SOCKET
 // User connected
 io.on("connection", function(socket) {
-  // This is the room name (pathname)
-  var room = "global";
-  var username = null;
 
+  var email = null;
+  var username = null;
   var cookies = socket.handshake.headers.cookie.split("; ");
+  var currentRoom = "global";
 
   for (var i = 0; i < cookies.length; i++) {
     if (startsWith(cookies[i], "token=")) {
       username = cookies[i].replace("token=", "").replace(/\%40(.*)/, "");
+      email = cookies[i].replace("token=", "").replace("%40", "@");
     }
   }
 
-  socket.join(room);
-  socket.broadcast.to(room).emit("join", username);
-  rooms.addUser(room, username);
-
   // Initializing client-side...
-  console.log("initializing user...");
-  rooms.getData(room, function(users, messages) {
-    var users = users;
-    var messageHistory = messages.map(JSON.parse);
-    socket.emit("initialize", {
-      username: username,
-      users: users,
-      messages: messageHistory
+  rooms.getRooms(function(allRooms) {
+    users.getSubscribedRooms(email, function(subscribedRooms) {
+      socket.emit("initialize", {
+        username: username,
+        rooms: allRooms,
+        subscribedRooms: subscribedRooms
+      });
+    });
+  });
+
+  socket.on("roomsubscribe", function(room) {
+    users.subscribeToRoom(email, room, function(reply) {
+      users.getSubscribedRooms(email, function(subscribedRooms) {
+        socket.emit("updaterooms", subscribedRooms);
+      });
+    });
+  });
+
+  socket.on("roomunsubscribe", function(room) {
+  });
+
+  socket.on("roomjoin", function(room) {
+    currentRoom = room;
+    socket.join(room, function() {
+      rooms.addUser(room, username, function() {
+        var msg = {type: 'user', user: username, event: 'join'};
+        rooms.addMessage(room, msg, function() {
+          rooms.getData(room, function(users, messages) {
+            socket.emit("user", users);
+            socket.emit("message", messages);
+            socket.to(room).emit("user", users);
+            socket.to(room).emit("message", messages);
+          });
+        });
+      });
+    });
+  });
+
+  socket.on("roomleave", function(room) {
+    socket.leave(room, function() {
+      rooms.removeUser(room, username, function() {
+        var msg = {type: 'userevent', user: username, event: 'leave'};
+        rooms.addMessage(room, msg, function() {
+          rooms.getData(room, function(users, messages) {
+            socket.emit("user", users);
+            socket.emit("message", messages);
+            socket.to(room).emit("user", users);
+            socket.to(room).emit("message", messages);
+          });
+        });
+      });
     });
   });
 
   // On receiving a message from the user
-  socket.on("message", function(msg) {
-    io.to(room).emit("message", msg);
-    console.log(msg.author + " said " + msg.text + " in room " + room);
-    rooms.addMessage(room, msg);
+  socket.on("message", function(msg, room) {
+    msg['type'] = "message";
+    rooms.addMessage(room, msg, function() {
+      rooms.getData(room, function(users, messages) {
+        io.to(room).emit("message", messages);
+      });
+    });
   });
+
 
   // On user disconnect
   socket.on("disconnect", function() {
-    // Only consider it a disconnect if user has a username.
-    // Otherwise pretend they never came
-    if (username) {
-      io.to(room).emit("quit", username);
-      rooms.removeUser(room, username);
-    }
+    var room = currentRoom;
+    rooms.removeUser(room, username, function() {
+      var msg = {type: 'userevent', user: username, event: 'leave'};
+      rooms.addMessage(room, msg, function() {
+        rooms.getData(room, function(users, messages) {
+          socket.to(room).emit("user", users);
+          socket.to(room).emit("message", messages);
+        });
+      });
+    });
   });
+
 });
