@@ -1,5 +1,5 @@
-How to set up the app
-=====================
+src/  -> How to set up the app
+==============================
 
 First, install node.js at nodejs.org and Redis at redis.io.
 
